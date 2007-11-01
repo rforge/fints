@@ -11,22 +11,20 @@
 # Adjust the following to
 # setwd to 'TsayFiles' 
 getwd()
-setwd("..")
+#setwd("..")
+#setwd("FinTS")
+#setwd("pkg")
+#setwd("inst")
+#setwd("scripts")
+#setwd("TsayFiles")
 
-setwd("data")
-
-setwd("FinTS")
-setwd("pkg")
-setwd("inst")
-setwd("scripts")
-setwd("TsayFiles")
+TsayDir <- "../FinTS/pkg/inst/scripts/TsayFiles/"
 
 # 0.1.  Tsayfiles$ch01$text 
 
 library(FinTS)
-library(zoo)
 
-load("TsayFiles.rda")  
+data(TsayFiles)  
 
 TsayFiles$ch01$text[1:2,]
 ch01 <- with(TsayFiles$ch01, text[text[, 4]=="TRUE", ])
@@ -48,7 +46,11 @@ as.vector(ch01[, "data"])
 ##     Daily simple returns of IBM, VW, EW, SP (7/3/62-12/31/03):
 ##      (Format: date, IBM, VW, EW & SP)
 ##
+(d.i.dat <- paste(TsayDir, ch01[1, "file"], sep="") )
 
+readLines(d.i.dat, 3)
+d.ibmvwewsp6203 <- read.table(d.i.dat)
+d.ibmvwewsp6203[1:2,]
 
 ##
 ## 2.  d-intc7303
