@@ -2,8 +2,8 @@ Package: FinTS
 Type: Package
 Title: Companion to Tsay (2005) Analysis of Financial 
        Time Series 
-Version: 0.0-2
-Date: 2007-04-27
+Version: 0.1-0
+Date: 2007-11-03
 Author: Spencer Graves  
 Maintainer: Spencer Graves <spencer.graves@prodsyse.com> 
 Description: R companion to Tsay (2005) 

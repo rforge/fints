@@ -99,25 +99,25 @@ data(m.3m4603)
 data(m.msft8603)
 data(m.c8603)
 (Monthly.Simple.Returns.pct <- rbind(
-    FinTS.stats(100*m.ibmvwewsp2603[, "SP"]),     
-    FinTS.stats(100*m.ibmvwewsp2603[, "VW"]),     
-    FinTS.stats(100*m.ibmvwewsp2603[, "EW"]), 
-    FinTS.stats(100*m.ibmvwewsp2603[, "IBM"]),     
-    FinTS.stats(100*m.intc7303[,"Intel"]),     
-    FinTS.stats(100*m.3m4603[, "MMM"]), 
-    FinTS.stats(100*m.msft8603[, 'MSFT']), 
-    FinTS.stats(100*m.c8603[, "C"]) 
+    SP=FinTS.stats(100*m.ibmvwewsp2603[, "SP"]),     
+    VW=FinTS.stats(100*m.ibmvwewsp2603[, "VW"]),     
+    EW=FinTS.stats(100*m.ibmvwewsp2603[, "EW"]), 
+    IBM=FinTS.stats(100*m.ibmvwewsp2603[, "IBM"]),     
+    Intel=FinTS.stats(100*m.intc7303[,"Intel"]),     
+    MMM=FinTS.stats(100*m.3m4603[, "MMM"]), 
+    Microsoft=FinTS.stats(100*m.msft8603[, 'MSFT']), 
+    CitiGroup=FinTS.stats(100*m.c8603[, "C"]) 
 ) )
 
 (Monthly.log.Returns.pct <- rbind(
-    FinTS.stats(100*log(1+m.ibmvwewsp2603[, "SP"])), 
-    FinTS.stats(100*log(1+m.ibmvwewsp2603[, "VW"])),     
-    FinTS.stats(100*log(1+m.ibmvwewsp2603[, "EW"])), 
-    FinTS.stats(100*log(1+m.ibmvwewsp2603[, "IBM"])),     
-    FinTS.stats(100*log(1+m.intc7303[,"Intel"])),     
-    FinTS.stats(100*log(1+m.3m4603[, "MMM"])), 
-    FinTS.stats(100*log(1+m.msft8603[, 'MSFT'])), 
-    FinTS.stats(100*log(1+m.c8603[, "C"])) 
+    SP=FinTS.stats(100*log(1+m.ibmvwewsp2603[, "SP"])), 
+    VW=FinTS.stats(100*log(1+m.ibmvwewsp2603[, "VW"])),     
+    EW=FinTS.stats(100*log(1+m.ibmvwewsp2603[, "EW"])), 
+    IBM=FinTS.stats(100*log(1+m.ibmvwewsp2603[, "IBM"])),     
+    Intel=FinTS.stats(100*log(1+m.intc7303[,"Intel"])),     
+    MMM=FinTS.stats(100*log(1+m.3m4603[, "MMM"])), 
+    Microsoft=FinTS.stats(100*log(1+m.msft8603[, 'MSFT'])), 
+    CitiGroup=FinTS.stats(100*log(1+m.c8603[, "C"])) 
 ) )
 
 dimnames(Daily.Simple.Returns.pct)[[1]] <-
@@ -219,4 +219,40 @@ qqnorm(m.log.ibm, datax=TRUE)
 ##
 ## 1.3.  Processes Considered
 ##
+
+# Figure 1.5.  Time plot of US monthly interest rates 
+op <- par(mfrow=c(2,1))
+plot(m.gs10, xlab="year", ylab="rate", type="l")
+title("Monthly 10-yr Treasury constant maturity rates")
+plot(m.gs1, xlab="year", ylab="rate", type="l")
+title("Monthly 1-yr Treasury constant maturity rates")
+par(op)
+
+# p. 21
+# Figure 1.6.  Time plot of daily exchange rate
+#              between US dollara and Japanese Yen 
+
+op <- par(mfrow=c(2,1))
+plot(d.fxjp00, xlab="year", ylab="Yens", type="l")
+plot(diff(d.fxjp00), xlab="year", ylab="Change", type="l")
+par(op)
+
+# p. 22
+# Table 1.3.  Descriptive Statistics of Selected US Financial Time Series
+
+(m.bondRtns <- rbind(
+  "1-12 months"=FinTS.stats(100*m.fama.bond5203[, "m1.12"]), 
+  "24-36 months"=FinTS.stats(100*m.fama.bond5203[, "m24.36"]), 
+  "48-60 months"=FinTS.stats(100*m.fama.bond5203[, "m48.60"]), 
+  "61-120 months"=FinTS.stats(100*m.fama.bond5203[, "m61.120"]) ))
+
+(m.treasuryRtns <- rbind(
+  "1 year"=FinTS.stats(m.gs1),
+  "3 years"=FinTS.stats(m.gs3),
+  "5 years"=FinTS.stats(m.gs5),
+  "10 years"=FinTS.stats(m.gs10) ))
+
+(w.treasuryRtns <- rbind(
+  "3 months"=FinTS.stats(w.tb3ms),
+  "6 months"=FinTS.stats(w.tb6ms) ) )
 

@@ -207,10 +207,10 @@ m.gs5[1:4]
 ##      Weekly Treasury Bill rates - 3 & 6 months
 ##
 ch01[17:18, ]
-w.tb3ms <- read.zoo(ch01.[18], format="%Y%m%d",
+w.tb3ms <- read.zoo(ch01.[17], format="%Y%m%d",
            col.names=c("date", "tb3ms") )
 w.tb3ms[1:2, ]
-w.tb6ms <- read.zoo(ch01.[17], format="%Y%m%d",
+w.tb6ms <- read.zoo(ch01.[18], format="%Y%m%d",
            col.names=c("date", "tb3ms") ) 
 w.tb6ms[1:2,]
 
