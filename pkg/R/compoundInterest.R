@@ -7,5 +7,6 @@ function(interest, periods=1,
   cI[frequency==Inf] <- exp(periods*interest)
 #
   if(net.value)cI-(net.value)
+  cI
 }
 

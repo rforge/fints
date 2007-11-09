@@ -46,10 +46,10 @@
 }
 \format{
   Objects of class zoo giving simple returns for each trading period
-  (day or month) from different start dates until the last trading day
-  of 2003.  
+  (day, week or month) for different periods, with different start dates
+  but typically running to the end of 2003.  
 
-  \item{d.ibmvwewsp6203, m.ibmvwewsp6203}{
+  \item{d.ibmvwewsp6203, m.ibmvwewsp2603}{
     Zoo objects with 4 columns (IBM, VW, EW, and SP).  Daily data starts
     with 1962-07-03.  Monthly data starts with 1920-01-30.  
   }

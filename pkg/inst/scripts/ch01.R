@@ -59,7 +59,7 @@ pnorm(-t.sk)
 # A slightly more accurate version of this is
 # agostino.test 
 library(moments)
-skew.test <- agostino.test(as.numeric(d.ibmvwewsp6203[, "IBM"]))
+(skew.test <- agostino.test(as.numeric(d.ibmvwewsp6203[, "IBM"])))
 
 # p. 11
 ##
@@ -129,9 +129,8 @@ dimnames(Monthly.Simple.Returns.pct)[[1]] <-
 dimnames(Monthly.log.Returns.pct)[[1]] <-
   c("SP", "VW", "EW", "IBM", "Intel", "3M", "MSFT", "Citi")
 
-write.table(rbind(Daily.Simple.Returns.pct, Daily.log.Returns.pct,
-                  Monthly.Simple.Returns.pct, Monthly.log.Returns.pct),
-            "Table1-1.csv", sep=",")
+#write.table(rbind(Daily.Simple.Returns.pct, Daily.log.Returns.pct,
+#  Monthly.Simple.Returns.pct, Monthly.log.Returns.pct),"Table1-2.csv", sep=",")
 
 # p. 12
 
@@ -256,3 +255,5 @@ par(op)
   "3 months"=FinTS.stats(w.tb3ms),
   "6 months"=FinTS.stats(w.tb6ms) ) )
 
+#write.table(rbind(m.bondRtns, m.treasuryRtns, w.treasuryRtns),
+#            "Table1-3.csv", sep=",")
