@@ -18,15 +18,19 @@
 exch.perc
 sp500
 #m.ibm2697
-d.ibmvwewsp6203
+#d.ibmvwewsp6203
 m.ibmspln
 m.ibmsplnsu
 d.sp8099  
 }
 \format{
-  m.intc7303 and d.ibmvwewsp6203 are used in both chapters 1 and 3 and
-  are documented with ch01data;  m.ibm2697 is used in both chapters 2
-  and 3 is documented with ch02data. 
+  Three data stes used in chapter 3 are also used in chapter 1 or 2 and
+  are documented with 'ch01data' or 'ch02data':  'm.intc7303' and
+  'd.ibmvwewsp6203' are used in both chapters 1 and 3 and are documented
+  with 'ch01data';  'm.ibm2697' is used in both chapters 2 and 3 is
+  documented with ch02data.
+
+  The other data sets used in chapter 3 are as follows:  
 
   \item{exch.perc}{
     numeric vector of length 2497 giving percentage changes in the

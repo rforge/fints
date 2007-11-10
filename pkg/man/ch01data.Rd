@@ -51,7 +51,7 @@
 
   \item{d.ibmvwewsp6203, m.ibmvwewsp2603}{
     Zoo objects with 4 columns (IBM, VW, EW, and SP).  Daily data starts
-    with 1962-07-03.  Monthly data starts with 1920-01-30.  
+    with 1962-07-03.  Monthly data starts with 1926-01-30.
   }
   \item{d.intc7303, m.intc7303}{
     Matrices of class zoo with a single column "Intel" starting from
