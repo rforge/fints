@@ -101,6 +101,9 @@ m.3m4697[1:4,]
 readLines(ch02.[6], 4)
 q.gdp4703a <- readLines(ch02.[6])
 q.gdp4703a[1:2] 
+#q.gdp4703t <- strptime(q.gdp4703a, "%Y %m")
+#q.gdp4703t[1:4]
+# NA 
 q.gdp4703b <- sub(" ", "/", q.gdp4703a)
 q.gdp4703b[1:2] 
 
@@ -149,8 +152,9 @@ m.decile1510[1:4,]
 ##      Weekly 1-yr & 3-yr interest rates
 ##
 readLines(ch02.[10], 4)
-#w.gs1n36299 <- read.zoo(ch02.[10], ...) ERRORS IN DATES; USE CORRRECTED FILE
+#w.gs1n36299 <- read.zoo(ch02.[10], ...) ERRORS IN DATES;
 
+# *** USE CORRRECTED FILE as follows:  
 w.gs1n36299File <- paste(TsayDir, "w-gs1n36299r.txt", sep="")
 w.gs1n36299 <- read.zoo(w.gs1n36299File, format="%Y-%m-%d", header=TRUE)
 w.gs1n36299[1:4,]

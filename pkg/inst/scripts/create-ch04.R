@@ -49,11 +49,14 @@ ch04. <- paste(TsayDir, ch04[, "file"], sep="")
 
 readLines(ch04.[1], 4)
 m.unrate. <- readLines(ch04.[1])
+#m.unrDate. <- strptime(m.unrDate, "%Y %m %d")
+# NAs
+
 m.unrDate <- gsub(" ", "-", substring(m.unrate., 1, 10))
 m.unrDate[1:4]
-m.unrDate. <- strptime(m.unrDate, "%Y-%m-%d")
-m.unrDate.[1:4]
-
+#m.unrDate. <- strptime(m.unrDate, "%Y-%m-%d")
+#m.unrDate.[1:4]
+# NAs
 m.unrate <- zoo(as.numeric(substring(m.unrate., 11)),
                 as.POSIXct(m.unrDate.))
 m.unrate[1:4]
@@ -84,6 +87,7 @@ all.equal(tst.3m4697, m.3m4697)
 ## 4.  star.rats
 ##     RATS program for smooth TAR:  ignore
 ##
+(star.rats <- readLines(ch04.[4]))
 
 ##
 ## 5.  q-gnp4791

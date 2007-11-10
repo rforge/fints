@@ -128,11 +128,17 @@ m.c8603[1:2, ]
 #  Nonstandard date format makes reading difficult 
 ch01[11:12,]
 readLines(ch01.[11], 4)
+#m.gs10 <- read.zoo(ch01.[11], "%Y %m %d",col.names=c("date","gs10"))
+# Error:  More columns than column names
+
 m.gs10a <- readLines(ch01.[11])
 m.gs10a[1:2]
+m.gs10t <- strptime(m.gs10a, "%Y %m %d") 
+m.gs10t[1:4]
+
 m.gs10 <- zoo(as.numeric(substring(m.gs10a, 11)),
-     as.POSIXct(strptime(substring(m.gs10a, 1, 10),
-                         "%Y %m %d") ) )
+              as.POSIXct(m.gs10t) )
+                
 m.gs10[1:2,]
 
 m.gs1a <- readLines(ch01.[12])
@@ -157,7 +163,9 @@ d.fxjp00a <- readLines(ch01.[13])
 d.fxjp00a[1:4]
 # Insert sep characters
 # because I can't seem to get strptime to work properly
-# otherwise with this 2-digit year format.  
+# otherwise with this 2-digit year format.
+tst <- strptime(substring(d.fxjp00a, 1, 6), "%d%m%y")
+tst[1:4]
 d.fxjp00dt <- paste(substr(d.fxjp00a, 1, 2),
                     substr(d.fxjp00a, 3, 4),
                     substr(d.fxjp00a, 5, 6), sep="-")
