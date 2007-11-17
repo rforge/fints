@@ -13,13 +13,13 @@
   Financial time series used in examples in chapter 4.  
 }
 \usage{
-m.unrate
+data(m.unrate)
 #d.ibmvwewsp6203
 #m.3m4697
 #q.gnp4791
-w.3mtbs7097
-m.ibmln2699
-q.unemrate
+data(w.3mtbs7097)
+data(m.ibmln2699)
+data(q.unemrate)
 }
 \format{
   Three data stes used in chapter 4 are also used earlier:
@@ -55,8 +55,8 @@ q.unemrate
   }
 }
 \references{
-  Ruey Tsay (2005)
-  Analysis of Financial Time Series, 2nd ed. (Wiley)
+  Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
+  ch. 4) 
 }
 \keyword{datasets}
 \seealso{

@@ -6,6 +6,9 @@ data(TsayFiles)
 ####
 ####
 
+#*** Thanks to Gabor Grothendieck and Diethelm Wuertz
+#*** for help with how to process dates and times 
+
 ##
 ## 0.  TsayFiles directory 
 ##
@@ -51,7 +54,8 @@ ch01. <- paste(TsayDir, ch01[, "file"], sep="")
 d.ibmvwewsp6203 <- read.zoo(ch01.[1], format="%Y%m%d",
            col.names=c("date", "IBM", "VW", "EW", "SP") )
 d.ibmvwewsp6203[1:2,]
-
+class(index(d.ibmvwewsp6203))
+# Date 
 ##
 ## 2.  d-intc7303
 ##     Daily simple returns of Intel stock (12/15/72-12/31/03) 
@@ -59,7 +63,9 @@ d.ibmvwewsp6203[1:2,]
 d.intc7303 <- read.zoo(ch01.[2], format="%Y%m%d",
            col.names=c("date", "Intel") )
 d.intc7303[1:2, ]
-
+index(d.intc7303)[1:2]
+class(index(d.intc7303))
+# Date
 ##
 ## 3.  d-3m6203
 ##     Daily simple returns of 3M stock
@@ -133,19 +139,18 @@ readLines(ch01.[11], 4)
 
 m.gs10a <- readLines(ch01.[11])
 m.gs10a[1:2]
-m.gs10t <- strptime(m.gs10a, "%Y %m %d") 
+m.gs10t <- as.Date(m.gs10a, "%Y %m %d") 
 m.gs10t[1:4]
 
 m.gs10 <- zoo(as.numeric(substring(m.gs10a, 11)),
-              as.POSIXct(m.gs10t) )
+              m.gs10t )
                 
 m.gs10[1:2,]
 
 m.gs1a <- readLines(ch01.[12])
 m.gs1a[1:2]
 m.gs1 <- zoo(as.numeric(substring(m.gs1a, 11)),
-     as.POSIXct(strptime(substring(m.gs1a, 1, 10),
-                         "%Y %m %d") ) )
+             as.Date(m.gs1a, "%Y %m %d"))
 m.gs1[1:2,]
 
 ##
@@ -164,17 +169,14 @@ d.fxjp00a[1:4]
 # Insert sep characters
 # because I can't seem to get strptime to work properly
 # otherwise with this 2-digit year format.
-tst <- strptime(substring(d.fxjp00a, 1, 6), "%d%m%y")
-tst[1:4]
-d.fxjp00dt <- paste(substr(d.fxjp00a, 1, 2),
-                    substr(d.fxjp00a, 3, 4),
-                    substr(d.fxjp00a, 5, 6), sep="-")
-d.fxjp00dt[1:4]
-d.fxjp00d <- strptime(d.fxjp00dt, "%d-%m-%y")
-d.fxjp00d[1:4] # good
+d.fxjp00b <- paste(substring(d.fxjp00a, 1, 2),
+                   substring(d.fxjp00a, 3), sep="-")
+d.fxjp00t <- as.Date(d.fxjp00b, "%d-%m%y")
+d.fxjp00t[1:4]
+class(d.fxjp00t)
 
 d.fxjp00 <- zoo(as.numeric(substring(d.fxjp00a, 7)),
-                 as.POSIXct(d.fxjp00d) ) 
+                 d.fxjp00t ) 
 d.fxjp00[1:4] # good 
 
 ##
@@ -195,19 +197,19 @@ ch01[15:16,]
 readLines(ch01.[15], 4)
 # Problem with another non-standard date format
 m.gs3a <- readLines(ch01.[15])
-m.gs3d <- strptime(m.gs3a, "%Y %m %d")
+m.gs3d <- as.Date(m.gs3a, "%Y %m %d")
 m.gs3d[1:4]
 
 m.gs3 <- zoo(as.numeric(substring(m.gs3a, 11)),
-             as.POSIXct(m.gs3d) )
+             m.gs3d)
 m.gs3[1:4]
 
 m.gs5a <- readLines(ch01.[16])
 m.gs5a[1:4]
-m.gs5d <- strptime(m.gs5a, "%Y %m %d")
+m.gs5d <- as.Date(m.gs5a, "%Y %m %d")
 m.gs5d[1:4]
 m.gs5 <- zoo(as.numeric(substring(m.gs5a, 11)),
-             as.POSIXct(m.gs5d) )
+             m.gs5d)
 m.gs5[1:4]
 
 ##
@@ -230,7 +232,7 @@ ch01.datNames <- make.names(ch01[, 1])
 ch01.rda <- paste(ch01.datNames, "rda", sep=".")
 #save(list=ch01.datNames, file="ch01.rda")
 
-nObj <- length(ch01.datNames)
-for(i in 1:nObj)
+nObj1 <- length(ch01.datNames)
+for(i in 1:nObj1)
   save(list=ch01.datNames[i],
        file=ch01.rda[i])

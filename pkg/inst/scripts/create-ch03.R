@@ -71,7 +71,7 @@ readLines(ch03.[3], 4)
 sp500a <- scan(ch03.[3])
 # read 792 items starting from 1926 
 # (91-47)*4 = 864
-sp500 <- as.zoo(ts(sp500a, 1926, freq=12))
+sp500 <- zooreg(sp500a, 1926, freq=12)
 sp500[1:4]
 
 ##
@@ -83,7 +83,7 @@ tst.ibm2697a <- scan(ch03.[4])
 # read 864 items
 # 97-25 = 72 * 12 = 864 
 
-tst.ibm2697 <- as.zoo(ts(tst.ibm2697a, start=1926, freq=12))
+tst.ibm2697 <- zooreg(tst.ibm2697a, start=1926, freq=12)
                 
 data(m.ibm2697)
 all.equal(tst.ibm2697, m.ibm2697)
@@ -111,8 +111,7 @@ m.ibmspln. <- read.table(ch03.[6], col.names=c("IBM", "SP"))
 dim(m.ibmspln.)
 #  888  2
 m.ibmspln.[1:4,]
-m.ibmspln2 <- ts(m.ibmspln., start=1926, freq=12)
-m.ibmspln <- as.zoo(m.ibmsplin2)
+m.ibmspln <- zooreg(m.ibmspln., start=1926, freq=12)
 m.ibmspln[1:4,]
 str(m.ibmspln)
 ##
@@ -123,8 +122,7 @@ readLines(ch03.[7], 4)
 m.ibmsplnsu. <- read.table(ch03.[7],
                 col.names=c("IBM", "SP", "summer"))
                                       
-m.ibmsplnsu2 <- ts(m.ibmsplnsu., start=1926, freq=12)
-m.ibmsplnsu <- as.zoo(m.ibmsplnsu2)
+m.ibmsplnsu <- zooreg(m.ibmsplnsu., start=1926, freq=12)
 m.ibmsplnsu[1:4,]
 str(m.ibmsplnsu)
 

@@ -16,16 +16,16 @@
   Financial time series used in examples in chapter 2.  
 }
 \usage{
-m.ibm2697
-m.vw2697
-q.gnp4791
-m.ibm3dx2603
-m.3m4697
-q.gdp4703
-d.sp9003lev
-q.jnj
-m.decile1510
-w.gs1n36299  
+data(m.ibm2697)
+data(m.vw2697)
+data(q.gnp4791)
+data(m.ibm3dx2603)
+data(m.3m4697)
+data(q.gdp4703)
+data(d.sp9003lev)
+data(q.jnj)
+data(m.decile1510)
+data(w.gs1n36299)
 }
 \format{
   Objects of class zoo giving simple returns for each trading period 
@@ -73,8 +73,8 @@ w.gs1n36299
   }
 }
 \references{
-  Ruey Tsay (2005)
-  Analysis of Financial Time Series, 2nd ed. (Wiley)
+  Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
+  ch. 2)
 }
 \keyword{datasets}
 \seealso{ \code{\link{ch01data}} }

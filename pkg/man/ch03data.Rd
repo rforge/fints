@@ -15,13 +15,13 @@
 }
 \usage{
 #m.intc7303
-exch.perc
-sp500
+data(exch.perc)
+data(sp500)
 #m.ibm2697
 #d.ibmvwewsp6203
-m.ibmspln
-m.ibmsplnsu
-d.sp8099  
+data(m.ibmspln)
+data(m.ibmsplnsu)
+data(d.sp8099  )
 }
 \format{
   Three data stes used in chapter 3 are also used in chapter 1 or 2 and
@@ -69,8 +69,8 @@ d.sp8099
   }
 }
 \references{
-  Ruey Tsay (2005)
-  Analysis of Financial Time Series, 2nd ed. (Wiley)
+  Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
+  ch. 3)
 }
 \keyword{datasets}
 \seealso{

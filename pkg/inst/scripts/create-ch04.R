@@ -44,23 +44,15 @@ ch04. <- paste(TsayDir, ch04[, "file"], sep="")
 
 ##
 ## 1.  m-unrate
-##     Monthly U.S. cicilian unemployment rate(48-04)
+##     Monthly U.S. civilian unemployment rate(48-04)
 ##
 
 readLines(ch04.[1], 4)
 m.unrate. <- readLines(ch04.[1])
-#m.unrDate. <- strptime(m.unrDate, "%Y %m %d")
-# NAs
-
-m.unrDate <- gsub(" ", "-", substring(m.unrate., 1, 10))
-m.unrDate[1:4]
-#m.unrDate. <- strptime(m.unrDate, "%Y-%m-%d")
-#m.unrDate.[1:4]
-# NAs
 m.unrate <- zoo(as.numeric(substring(m.unrate., 11)),
-                as.POSIXct(m.unrDate.))
+                as.Date(m.unrate., "%Y %m %d"))
 m.unrate[1:4]
-str(m.unrate)
+
 ##
 ## 2.  d-ibmvwewsp6203
 ##     Daily returns of IBM stock
@@ -108,15 +100,9 @@ all.equal(tst.gnp4791, as.numeric(q.gnp4791))
 readLines(ch04.[6], 4)
 w.3mtbs7097. <- readLines(ch04.[6])
 
-w.3mtbsDate <- gsub(" ", "-", substring(w.3mtbs7097., 1, 10))
-w.3mtbsDate[1:4]
-w.3mtbsDate. <- strptime(w.3mtbsDate, "%Y-%m-%d")
-w.3mtbsDate.[1:4]
-
 w.3mtbs7097 <- zoo(as.numeric(substring(w.3mtbs7097., 11)),
-                as.POSIXct(w.3mtbsDate.))
+                   as.Date(w.3mtbsDate., "%Y %m %d"))
 w.3mtbs7097[1:4]
-str(w.3mtbs7097)
 range(index(w.3mtbs7097))
 
 ##
@@ -127,8 +113,8 @@ readLines(ch04.[7], 4)
 m.ibmln2699. <- scan(ch04.[7])
 # read 888 items
 # (99-25)*12 = 888 
-m.ibmln2699 <- as.zoo(ts(m.ibmln2699., 1926, freq=12))
-str(m.ibmln2699)
+m.ibmln2699 <- zooreg(m.ibmln2699., 1926, freq=12)
+m.ibmln2699[1:4]
 
 ##
 ## 8.  q-unemrate
@@ -139,9 +125,8 @@ q.unemrate. <- scan(ch04.[8] )
 # read 184 items
 # (1993-1947)*4 = 184
 
-q.unemrate <- as.zoo(ts(q.unemrate., 1948, freq=4))
+q.unemrate <- zooreg(q.unemrate., 1948, freq=4)
 q.unemrate[1:4]
-str(q.unemrate)
 ##
 ## 9.  nnet-ibm.sor
 ##     R and S commands for Example 4.7

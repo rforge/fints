@@ -25,24 +25,24 @@
   Financial time series used in examples in chapter 1.  
 }
 \usage{
-   d.ibmvwewsp6203
-   d.intc7303
-   d.3m6203
-   d.msft8603
-   d.c8603
-   m.ibmvwewsp2603
-   m.intc7303
-   m.3m4603
-   m.msft8603
-   m.c8603
-   m.gs10
-   m.gs1
-   d.fxjp00
-   m.fama.bond5203
-   m.gs3
-   m.gs5
-   w.tb3ms
-   w.tb6ms
+data(d.ibmvwewsp6203)
+data(d.intc7303)
+data(d.3m6203)
+data(d.msft8603)
+data(d.c8603)
+data(m.ibmvwewsp2603)
+data(m.intc7303)
+data(m.3m4603)
+data(m.msft8603)
+data(m.c8603)
+data(m.gs10)
+data(m.gs1)
+data(d.fxjp00)
+data(m.fama.bond5203)
+data(m.gs3)
+data(m.gs5)
+data(w.tb3ms)
+data(w.tb6ms)
 }
 \format{
   Objects of class zoo giving simple returns for each trading period
@@ -105,8 +105,8 @@
   }
 }
 \references{
-  Ruey Tsay (2005)
-  Analysis of Financial Time Series, 2nd ed. (Wiley, p. 11)
+  Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
+  ch. 1)
 }
 \keyword{datasets}
 \seealso{ \code{\link{FinTS.stats}} }

@@ -48,8 +48,7 @@ readLines(ch02.[1], 4)
 m.ibm2697a <- scan(ch02.[1])
 # read 864 items
 # (97-25)*12 = 864
-m.ibm2697t <- ts(m.ibm2697a, 1926, freq=12)
-m.ibm2697 <- as.zoo(m.ibm2697t)
+m.ibm2697 <- zooreg(m.ibm2697a, 1926, freq=12)
 m.ibm2697[1:22]
 
 ##
@@ -60,8 +59,7 @@ readLines(ch02.[2], 4)
 m.vw2697a <- scan(ch02.[2])
 # read 864 items
 # (97-25)*12 = 864
-m.vw2697t <- ts(m.vw2697a, 1926, freq=12)
-m.vw2697 <- as.zoo(m.vw2697t)
+m.vw2697 <- zooreg(m.vw2697a, 1926, freq=12)
 m.vw2697[1:22]
 
 ##
@@ -72,8 +70,7 @@ readLines(ch02.[3], 4)
 q.gnp4791a <- scan(ch02.[3])
 # read 176 items
 # (91-47)*4 = 864
-q.gnp4791t <- ts(q.gnp4791a, c(1947, 2), freq=4)
-q.gnp4791 <- as.zoo(q.gnp4791t)
+q.gnp4791 <- zooreg(q.gnp4791a, c(1947, 2), freq=4)
 q.gnp4791[1:22]
 
 ##
@@ -100,22 +97,17 @@ m.3m4697[1:4,]
 ##
 readLines(ch02.[6], 4)
 q.gdp4703a <- readLines(ch02.[6])
-q.gdp4703a[1:2] 
+q.gdp4703a[1:2]
+q.gdp4703d <- as.yearmon(q.gdp4703a, "%Y %m")
+q.gdp4703d[1:4]
+class(q.gdp4703d)
+
+q.gdp4703 <- zoo(as.numeric(substring(q.gdp4703a, 8)),
+                 q.gdp4703d)
+q.gdp4703[1:4]
 #q.gdp4703t <- strptime(q.gdp4703a, "%Y %m")
 #q.gdp4703t[1:4]
 # NA 
-q.gdp4703b <- sub(" ", "/", q.gdp4703a)
-q.gdp4703b[1:2] 
-
-q.gdp4703d <- paste(substring(q.gdp4703b, 1, 7), "/01", sep="")
-q.gdp4703d[1:2]
-
-q.gdp4703t <- strptime(q.gdp4703d, "%Y/%m/%d")
-q.gdp4703t[1:2]
-
-q.gdp4703 <- zoo(as.numeric(substring(q.gdp4703a, 8)),
-       as.POSIXct(q.gdp4703t) ) 
-q.gdp4703[1:2]
 
 ##
 ## 7.  d.sp9003lev
@@ -134,8 +126,7 @@ q.jnj0 <- scan(ch02.[8])
 # read 84 items
 # (80-59)*4
 q.jnj0[1:4]
-q.jnj. <- ts(q.jnj0, 1960, freq=4)
-q.jnj <- as.zoo(q.jnj.)
+q.jnj <- zooreg(q.jnj0, 1960, freq=4)
 q.jnj[1:4]
 
 ##
@@ -166,6 +157,6 @@ w.gs1n36299[1:4,]
 ch02.datNames <- make.names(ch02[, 1])
 ch02.rda <- paste(ch02.datNames, "rda", sep=".")
 
-nObj <- length(ch02.datNames)
-for(i in 1:nObj)
+nObj2 <- length(ch02.datNames)
+for(i in 1:nObj2)
   save(list=ch02.datNames[i], file=ch02.rda[i])
