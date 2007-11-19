@@ -39,11 +39,11 @@ data(w.gs1n36299)
     Growth rate of U.S. quarterly real gnp, from 1947Q2 to 1991Q1.  
   }
   \item{m.ibm3dx2603}{
-    Mnthy returns of IBM stock, the value and equal weighted and
+    Monthy returns of IBM stock, the value and equal weighted and
     Standard and Poors indices from 1926 through 2003.  
   }
   \item{m.3m4697}{
-    Mnthly simple returns of 3M stock from Feb., 1946 through
+    Monthly simple returns of 3M stock from Feb., 1946 through
     Dec. 2003. 
   }
   \item{q.gdp4703}{
@@ -62,7 +62,16 @@ data(w.gs1n36299)
     Monthly 3-yr and 5-yr Treasury constant maturity rates
   }
   \item{w.gs1n36299}{
-    Weekly 1-yr & 3-yr interest rates
+    Weekly 1-yr & 3-yr interest rates from 1962-01-05 through
+    2007-11-02.  These data were reextracted from the Federal Reserve
+    Bank at St. Louis to replace data from the book's web site that had
+    obvious data quality problems (e.g., a date of 1962-08-32).  Use
+    window(w.gs1n36299, start=as.Date("1962-01-12"),
+    end=as.Date("1999-09-10")).  
+
+
+    To get
+    data covering   
   }
 }
 %\details{
@@ -78,6 +87,12 @@ data(w.gs1n36299)
 }
 \keyword{datasets}
 \seealso{ \code{\link{ch01data}} }
-%\examples{
-%}
+\examples{
+# w.gs1n36299 covers a broader range than used in
+# Tsay (2005, sec. 2.9, pp. 80ff):  subset using 'window':
+
+data(w.gs1n36299)
+w.gs1n3 <- window(w.gs1n36299, start=as.Date("1962-01-12"),
+    end=as.Date("1999-09-10"))
+}
 
