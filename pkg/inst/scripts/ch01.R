@@ -186,24 +186,24 @@ par(op)
 # Figure 1.4.  Comparison of empirical and normal densities
 # for the monthly simple and log returns of IBM stock
 
-library(logspline)
+if(require(logspline)){
 
-m.ibm <- m.ibmvwewsp2603[, "IBM"]
-dens.ibm.rtns <- logspline(100*m.ibm)
-m.log.ibm <- 100*log(1+m.ibm)
-dens.ibm.logrtns <- logspline(m.log.ibm)
+  m.ibm <- m.ibmvwewsp2603[, "IBM"]
+  dens.ibm.rtns <- logspline(100*m.ibm)
+  m.log.ibm <- 100*log(1+m.ibm)
+  dens.ibm.logrtns <- logspline(m.log.ibm)
 
-op <- par(mfrow=c(1,2))
-plot(dens.ibm.rtns, xlim=c(-40, 40), xlab="simple returns", ylab="density")
-x.ibm <- seq(-40, 40, len=201)
-lines(x.ibm, dnorm(x.ibm, mean=100*mean(m.ibm), s=100*sd(m.ibm)),
-      lty="dotted", col="red", lwd=2)
+  op <- par(mfrow=c(1,2))
+  plot(dens.ibm.rtns, xlim=c(-40, 40), xlab="simple returns", ylab="density")
+  x.ibm <- seq(-40, 40, len=201)
+  lines(x.ibm, dnorm(x.ibm, mean=100*mean(m.ibm), s=100*sd(m.ibm)),
+        lty="dotted", col="red", lwd=2)
 
-plot(dens.ibm.logrtns, xlim=c(-40, 40), xlab="log returns", ylab="density")
-lines(x.ibm, dnorm(x.ibm, mean=mean(m.log.ibm), s=sd(m.log.ibm)),
-      lty="dotted", col="red", lwd=2)
-par(op)
-
+  plot(dens.ibm.logrtns, xlim=c(-40, 40), xlab="log returns", ylab="density")
+  lines(x.ibm, dnorm(x.ibm, mean=mean(m.log.ibm), s=sd(m.log.ibm)),
+        lty="dotted", col="red", lwd=2)
+  par(op)
+}
 qqnorm(100*m.ibm, datax=TRUE)
 qqnorm(m.log.ibm, datax=TRUE)
 
