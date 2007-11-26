@@ -1,4 +1,4 @@
-findConjugates <- function(x, complex.eps=1000*.Machine[["double.neg.eps"]]){
+findConjugates <- function(x, complex.eps=.Machine[["double.eps"]]){
 ##
 ##  1.  compute normalization 
 ##

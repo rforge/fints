@@ -284,10 +284,23 @@ data(m.ibmvwewsp2603)
 str(m.ibmvwewsp2603)
 
 op <- par(mfrow=c(2,1))
-plot(m.ibmvwewsp2603[, "EW"])
-acf(as.numeric(m.ibmvwewsp2603[, "EW"]), ylim=c(-.4, .4))
+plot(m.ibmvwewsp2603[, "EW"], main="(a) Monthly simple returns",
+     xlab="year", ylab="s-rtn")
+acf(as.numeric(m.ibmvwewsp2603[, "EW"]), ylim=c(-.4, .4),
+    main="(b) Sample ACF")
 par(op)
 
+# p. 54
+(fit.ew <- arima(as.numeric(m.ibmvwewsp2603[, "EW"]), order=c(0, 0, 9),
+             fixed=c(NA, 0, NA, rep(0, 5), NA, NA)))
+(Lj.ew <- Box.test(fit.ew$resid, 12, "Ljung-Box"))
+# Right statistic, wrong degrees of freedom
+pchisq(Lj.ew$statistic, 9, lower.tail=FALSE) 
+
+
+
+(fit0 <- arima0(as.numeric(m.ibmvwewsp2603[, "EW"]), order=c(0, 0, 9),
+             fixed=c(NA, 0, NA, rep(0, 5), NA, NA)))
 
 
 
