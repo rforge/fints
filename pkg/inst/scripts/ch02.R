@@ -201,32 +201,36 @@ data(q.gnp4791)
 pacf(q.gnp4791, lag.max=12)
 
 q.gnp4791.ar <- ar(q.gnp4791)
-q.gnp4791.ar$aic
+round(q.gnp4791.ar$aic, 3)
+# NOTE:  The 'AICs' printed on p. 43 follow the definition
+# of AIC used by R, NOT the definition on p. 42;
+# Tsay's definition divides the R definition
+# by the length of the series.
 
+q.gnp4791.ar$order
+
+data(m.vw2697) 
 ar.vw. <- ar(m.vw2697, order.max=3)
 names(ar.vw.)
 ar.vw.$ar # match bottom of p. 43
 ar.vw.$x.mean # vs. 0.0103 on p. 43
-sqrt(ar.vw.$var.pred) # match bottom of p. 43 
-
-(Lj.vw3 <- Box.test(ar.vw.$resid, 12, "Ljung-Box"))
-# Right statistic, wrong degrees of freedom
-names(Lj.vw3)
-
-pchisq(Lj.vw3$statistic, 9, lower.tail=FALSE) 
-
-names(ar.vw.)
-sqrt(diag(ar.vw.$asy.var.coef))
+sqrt(ar.vw.$var.pred) # match bottom of p. 43
 
 # p. 44
-# drop the AR(2) parameter, estimate only the AR(1) and AR(3)
-(fit.2 <- arima(m.vw2697, order=c(3, 0, 0),
-                fixed=c(NA, 0, NA, NA)))
-(fit.2Lj <- Box.test(fit.2$resid, 12, "Ljung-Box"))
-pchisq(fit.2Lj$statistic, 10, lower.tail=FALSE)
+(fit.3 <- ARIMA(m.vw2697, order=c(3, 0, 0),
+                Box.test.lag=12))
+fit.3$Box.test
+# X-squared = 16.7 vs. 16.9 in the book
+# p-value = 0.053 vs. 0.050 in the book 
 
-# p. 46 
-(ar.vw <- arima(m.vw2697, order=c(3,0,0)))
+# drop the AR(2) parameter, estimate only the AR(1) and AR(3)
+(fit.2 <- ARIMA(m.vw2697, order=c(3, 0, 0),
+                fixed=c(NA, 0, NA, NA),
+                Box.test.lag=12))
+fit.2$Box.test
+# X-squared = 17.0 vs. 17.2 in the book
+# p-value = 0.075 vs. 0.070 in the  book 
+
 
 # p. 49
 # Table 2.2
@@ -248,7 +252,8 @@ lines(c(m.vw2697[858], pred.ar.vw$pred), type="b", col="red", lty="dashed")
 lines(ul, type="b", col="green", lty="dotted")
 lines(ll, type="b", col="green", lty="dotted")
 
-plot(m.vw2697[851:864], type="b", ylim=c(-.2, .2))
+plot(m.vw2697[851:864], type="b", ylim=c(-.2, .2),
+     xlab="year (and fraction)", ylab="vw")
 lines(c(m.vw2697[858], pred.ar.vw$pred), type="b", col="red", lty="dashed")
 lines(ul, type="b", col="green", lty="dotted")
 lines(ll, type="b", col="green", lty="dotted")
@@ -266,7 +271,8 @@ sqrt(ar5.vw858$sigma2)
 ul5 <- c(m.vw2697[858], pred.ar5.vw$pred+1.96*pred.ar5.vw$se)
 ll5 <- c(m.vw2697[858], pred.ar5.vw$pred-1.96*pred.ar5.vw$se)
 
-plot(m.vw2697[851:864], type="b", ylim=c(-.2, .2))
+plot(m.vw2697[851:864], type="b", ylim=c(-.2, .2),
+          xlab="year (and fraction)", ylab="vw")
 lines(c(m.vw2697[858], pred.ar5.vw$pred), type="b", col="red", lty="dashed")
 lines(ul5, type="b", col="green", lty="dotted")
 lines(ll5, type="b", col="green", lty="dotted")
@@ -291,16 +297,18 @@ acf(as.numeric(m.ibmvwewsp2603[, "EW"]), ylim=c(-.4, .4),
 par(op)
 
 # p. 54
-(fit.ew <- arima(as.numeric(m.ibmvwewsp2603[, "EW"]), order=c(0, 0, 9),
-             fixed=c(NA, 0, NA, rep(0, 5), NA, NA)))
-(Lj.ew <- Box.test(fit.ew$resid, 12, "Ljung-Box"))
-# Right statistic, wrong degrees of freedom
-pchisq(Lj.ew$statistic, 9, lower.tail=FALSE) 
+(fit.ew <- ARIMA(as.numeric(m.ibmvwewsp2603[, "EW"]), order=c(0, 0, 9),
+             fixed=c(NA, 0, NA, rep(0, 5), NA, NA),
+             Box.test.lag=12))
+fit.ew$Box.test
 
 
 
-(fit0 <- arima0(as.numeric(m.ibmvwewsp2603[, "EW"]), order=c(0, 0, 9),
-             fixed=c(NA, 0, NA, rep(0, 5), NA, NA)))
+
+
+
+
+
 
 
 

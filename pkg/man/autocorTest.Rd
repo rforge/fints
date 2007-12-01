@@ -34,11 +34,11 @@ autocorTest(x, lag=log(length(x)))
 \references{
   Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley)
 }
-\keyword{datasets}
 \seealso{
   \code{\link[stats]{BoxTest}} }
 \examples{
 data(m.ibm2697)
 autocorTest(m.ibm2697, 5)
 }
+\keyword{ts}
 

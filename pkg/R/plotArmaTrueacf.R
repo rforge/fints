@@ -21,7 +21,11 @@ plotArmaTrueacf <- function(object, lag.max=20, pacf=FALSE, plot=TRUE,
 ##
   {
     if(length(AR)>0){
-      roots <- (1/polyroot(c(1, -AR)))
+#     roots <- (1/polyroot(c(1, -AR)))
+#     solve(polynomial(...)) is more accurate than polyroot
+      library(polynom) 
+      p <- polynomial(c(1, -AR))
+      roots <- (1/solve(p))
 # test stationarity
       if(any(abs(roots)>=1)){
         warning("root(s) outside the unit circle:  Process is NOT stationary.")
