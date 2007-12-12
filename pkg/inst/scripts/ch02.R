@@ -406,6 +406,19 @@ pnorm(-1.9)
 # Therefore, I don't theink we need to worry about
 # nonnormality.
 
+# There are 4 functions in different contributed packages in R
+# for the Augmented Dickey-Fuller test:
+# adf.test{tseries} by A. Trapletti
+# adfTest{fUnitRoots} by Diethelm Wuertz,
+#                 based on Trapletti's algorithm 
+# ur.df{urca} by Bernhard Pfaff
+# ADF.test{uroot} by Javier López-de-Lacalle
+
+data(q.gdp4703)
+adf.Unitroot <- Unitroot(log(q.gdp4703), trend='c', method='adf', lags=10)
+summary(adf.Unitroot)
+
+# Try the 4 ADF functions mentioned above:  
 library(tseries)
 adf.test(log(as.numeric(q.gdp4703)), a="e", k=9)
 #Dickey-Fuller = -0.9741, Lag order = 10, p-value = 0.05918
