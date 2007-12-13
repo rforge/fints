@@ -56,7 +56,12 @@ data(w.gs1n36299)
     Quarterly earnings of Johnson & Johnson from 1960 through 1980.  
   }
   \item{m.decile1510}{
-    Monthly simple returns of Deciles 1, 5, 10
+    Monthly simple returns of Deciles 1, 5, 10.  Decile 1 means the
+    weighted returns of companies in the first 10 percent of market cap
+    (i.e. 0 to 10).  (Thus, it is not the 10th percentile.)  Decile 10
+    means the returns of the top 10 percent of the companies (market
+    cap).  Therefore, decile 1 is the smallest listed companies, and
+    decile 10 is for the largest companies. 
   }
   \item{m.gs3, m.gs5}{
     Monthly 3-yr and 5-yr Treasury constant maturity rates

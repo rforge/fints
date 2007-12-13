@@ -53,14 +53,21 @@ Unitroot(x, trend=c("c", "nc", "ct"), method=c('adf', 'McKinnon'),
   Augmented Dickey-Fuller test (as of 2007.12.11):
   
   adf.test{tseries} by A. Trapletti
+  
   adfTest{fUnitRoots} by Diethelm Wuertz, based on Trapletti's algorithm 
+
   ur.df{urca} by Bernhard Pfaff
+
   ADF.test{uroot} by Javier López-de-Lacalle
 
   This 'Unitroot' function and the companion 'summary.fHTEST' use
   'adfTest'. It is provided for partial compatibility with the S-PLUS
-  Finmetrics examples on pp. 70 and 72 of Tsay (2005).  See the examples
-  below.  
+  Finmetrics examples on pp. 70-72 of Tsay (2005).  As noted in the
+  examples below, this function produces a very close match for the 
+  numbers on pp. 70-72, except for the ADF p-value in the first
+  example.  For this, 'adfTest' (and hence 'Uniroot') uses linear
+  interpolation in a crude table.  This could be improved.  See the
+  examples below. 
 }
 \value{
   an object of class '"fHTEST"' as described with 'UnitrootTests' in the
@@ -97,36 +104,38 @@ summary(adft.gdp)
 ## Tsay, pp. 71-72
 ##
 data(d.sp9003lev)
-adft.sp <- Unitroot(log(d.sp9003lev), trend='ct', method='adf', lags=10)
+adft.sp <- Unitroot(log(d.sp9003lev), trend='ct', method='adf', lags=14)
 summary(adft.sp)
-# These numbers only approximately matched the S-Plus Finmetrics
-# answers.  
 
 ##
 ## Using adfTest{fUnitRoots} directly
 ##
 adfTest(log(q.gdp4703), lags=9, type='c')
+# Gives the ADF statistic and p-value but not the table.  
 
 ##
 ## Using ur.df{urca}
 ##
-#if(require(urca))ur.df(log(q.gdp4703), type='c', lags=9)
-#Error in rownames(teststat) <- "statistic" : object "teststat" not found
+if(require(urca))ur.df(log(q.gdp4703), type='drift', lags=9)
+# prints 2 numbers:
+# The first is the ADF statistic on Tsay, p. 70.
+# It's not obvious what the second number is.  
 
 ##
 ## Using ADF.test{uroot} 
 ##
-#if(require(uroot))
-#  ADF.test(log(q.gdp4703), itsd=c(1, 0, 0), selectlags=list(mode=0:9))
-#Error in if (t0[2] != 1) \{ : missing value where TRUE/FALSE needed
-#Calls: ADF.test -> data.frame -> SeasDummy
+if(require(uroot)){
+   gdp.ts <- ts(log(q.gdp4703), frequency=4, start=c(1947,1))
+   ADF.test(gdp.ts, c(1,0,0), selectlags=list(mode=as.numeric(1:9)))
+#  Gives the ADF statistic on p. 71, but the p-value is wrong.
+}
 
 ##
 ## Using adf.test{tseries} 
 ##
-#if(require(tseries))adf.test(log(q.gdp4703), alternative="stationary", k=9)
-#Error in embed(y, k) : 'x' is not a vector or matrix
-#Calls: adf.test -> embed
+if(require(tseries))  
+  adf.test(log(as.numeric(q.gdp4703)), alternative="stationary", k=9)
+# None of the numbers match;  I don't know why.  
 }
 \keyword{ts}
 

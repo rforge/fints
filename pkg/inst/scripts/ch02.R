@@ -420,8 +420,11 @@ summary(adf.Unitroot)
 
 # Try the 4 ADF functions mentioned above:  
 library(tseries)
-adf.test(log(as.numeric(q.gdp4703)), a="e", k=9)
-#Dickey-Fuller = -0.9741, Lag order = 10, p-value = 0.05918
+l.gdp <- log(as.numeric(q.gdp4703))
+adf.test(l.gdp, alternative="stationary", k=9)
+#Dickey-Fuller = -0.7959, Lag order = 9, p-value = 0.9608
+#alternative hypothesis: stationary
+# None of the numbers match the book.  I don't know why.  
 
 library(urca)
 (fadf.c.l.gdp <- ur.df(log(q.gdp4703), type="drift", lags=9))
@@ -435,7 +438,7 @@ summary(fadf.c.l.gdp)
 library(fUnitRoots)
 (fadf.c.l.gdp <- adfTest(log(q.gdp4703), type="c", lags=9))
 # Dickey-Fuller: -1.1306;  P VALUE: 0.6358 
-str(fadf.c.l.gdp)
+# The statistic is correct, but the p-value is off.  
  
 library(uroot)
 gdp.uroot <- ts(log(q.gdp4703), frequency=4, start=c(1947,1))
@@ -445,71 +448,22 @@ ADF.d.l.gdp <- ADF.test(gdp.uroot, c(1,0,0),
 #Warning message:
 #In interpolpval(code = code, stat = adfreg[, 3], N = N) :
 #  p-value is greater than printed p-value
-summary(ADF.d.l.gdp)
+ADF.d.l.gdp
 summary(ADF.d.l.gdp@lmadf)
 # This call to ADF.test produces essentially the same answer
-# as S-Plus unitroot 
+# as S-Plus unitroot, apart from the p-value 
 
 # p. 71
 # Figure 2.12.  log(S&P 500), 1990.01.02 - 2003.12.31
 
 data(d.sp9003lev)
-plot(d.sp9003lev, xlab="year", ylab="S&P 500")
 plot(log(d.sp9003lev), xlab="year", ylab="ln(index)")
 
-fit.d.sp <- ar(as.numeric(diff(log(d.sp9003lev))))
-#Call: ar(x = as.numeric(diff(log(d.sp9003lev))))
-#Coefficients:
-#      1        2        3        4        5        6        7        8  
-#-0.0035  -0.0246  -0.0349   0.0046  -0.0369  -0.0191  -0.0450   0.0010  
-#      9       10       11       12       13  
-# 0.0094   0.0145  -0.0143   0.0512   0.0316  
-#Order selected 13  sigma^2 estimated as  0.0001101 
+# p. 72 
+sp.Unitroot <- Unitroot(log(d.sp9003lev), trend='ct', method='adf', lags=14)
+summary(sp.Unitroot)
 
-str(fit.d.sp)
-aic.d.sp <- fit.d.sp$aic
-plot(names(aic.d.sp), aic.d.sp, type="b")
-
-# Order 13 = min AIC
-
-library(tseries)
-adf.test(as.numeric(log(d.sp9003lev)), k=14)
-# Dickey-Fuller = -0.9566, Lag order = 14, p-value = 0.9458
-# book:  -0.99658, p-value = 0.9469
-
-library(urca)
-(urca.c.l.sp <- ur.df(log(d.sp9003lev), type="trend", lags=14))
-summary(urca.c.l.sp)
-#Value of test-statistic is: -2.2389 3.7382 2.5972 
-#Critical values for test statistics: 
-#      1pct  5pct 10pct
-#tau3 -4.04 -3.45 -3.15
-#phi2  6.50  4.88  4.16
-#phi3  8.73  6.49  5.47
-
-library(fUnitRoots)
-(fadf.c.l.gdp <- adfTest(log(d.sp9003lev), lags=14, type="ct"))
-# Dickey-Fuller: -0.9566, P VALUE: 0.9458 
-# matches adf.test NOT ur.df
-# For q.gdp4703, adfTest matched uf.df NOT adf.test
-
-library(uroot)
-
-ADF.test(log(d.sp9003lev), c(1,1,0),
-         selectlags=list(mode="signf", Pmax=14))
-#Error in if (t0[2] != 1) { : missing value where TRUE/FALSE needed
-# ADF.test requires "a univariate time series object"
-# Here t0 = start(log(d.sp9003lev)),
-# which is a 'Date' object, NOT a vector of length 2.  
-str(d.sp9003lev)
-index(d.sp9003lev)[1:11]
-table(diff(index(d.sp9003lev)))
-#   1    2    3    4    7 
-#2766   35  648   81    1
-# Conclusion:
-# I'm not eager to try harder to use ADF.test
-
-# p. 72
+# p. 73
 ##
 ## sec. 2.8.  Seasonal Models
 ##
@@ -541,16 +495,16 @@ par(op)
 
 (fit.jnj <- arima(log(q.jnj), order=c(0, 1, 1),
                  seasonal=list(order=c(0, 1, 1))))
-str(fit.jnj)
+#str(fit.jnj)
 sqrt(fit.jnj$sigma2)
 
 # Figure 2.15
-# p. 77
+# p. 76-77
 fit.jnj76 <- arima(log(q.jnj[1:76]), order=c(0, 1, 1),
                  seasonal=list(order=c(0, 1, 1)))
 (pred.jnj76 <- predict(fit.jnj76, 8))
 
-str(q.jnj)
+#str(q.jnj)
 plot(q.jnj[71:84], xlab="year", ylim=c(0, 30),
      ylab="earning")
 points(exp(pred.jnj76$pred))
@@ -559,3 +513,38 @@ ll <- with(pred.jnj76, pred-1.96*se)
 
 lines(exp(ul), col="red", lty="dashed")
 lines(exp(ll), col="red", lty="dashed")
+
+# Example 2.4
+data(m.decile1510)
+str(m.decile1510)
+
+op <- par(mfcol=c(2,2))
+
+plot(m.decile1510[,"Decile1"], xlab="year", ylab="s-rtn",
+     main="(a) Simple returns")
+
+acf(as.numeric(m.decile1510[,"Decile1"]), lag.max=36,
+    main="(b) Sample ACF")
+
+fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
+                  seasonal=list(order=c(1, 0, 1)))
+#Error in solve.default(res$hessian * n.used) : 
+#  Lapack routine dgesv: system is exactly singular
+
+fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
+                  seasonal=list(order=c(1, 0, 1)),
+                  method="CSS")
+#Error in optim(init[mask], armaCSS, method = "BFGS", hessian = TRUE, control = optim.control) : 
+#  initial value in 'vmmin' is not finite
+
+fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
+                  seasonal=list(order=c(1, 0, 1)),
+                  optim.control=list(method="BFGS"))
+#Error in solve.default(res$hessian * n.used) : 
+#  Lapack routine dgesv: system is exactly singular
+
+fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
+                  seasonal=list(order=c(1, 0, 1)),
+                  optim.control=list(method="CG"))
+#Error in solve.default(res$hessian * n.used) : 
+#  Lapack routine dgesv: system is exactly singular
