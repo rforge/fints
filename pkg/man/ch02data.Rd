@@ -67,16 +67,15 @@ data(w.gs1n36299)
     Monthly 3-yr and 5-yr Treasury constant maturity rates
   }
   \item{w.gs1n36299}{
-    Weekly 1-yr & 3-yr interest rates from 1962-01-05 through
-    2007-11-02.  These data were reextracted from the Federal Reserve
-    Bank at St. Louis to replace data from the book's web site that had
-    obvious data quality problems (e.g., a date of 1962-08-32).  Use
-    window(w.gs1n36299, start=as.Date("1962-01-12"),
-    end=as.Date("1999-09-10")).  
+    zoo object with two columns, 'ga1' and 'gs3', giving weekly 1-yr &
+    3-yr interest rates from 1962-01-05 through 2007-11-02.  These data
+    were reextracted from the Federal Reserve Bank at St. Louis to
+    replace data from the book's web site that had obvious data quality
+    problems (e.g., a date of 1962-08-32).
 
-
-    To get
-    data covering   
+    To get data covering January 4, 1962, through September 10, 1999,
+    use window(w.gs1n36299, start=as.Date("1962-01-12"),
+    end=as.Date("1999-09-10")). 
   }
 }
 %\details{

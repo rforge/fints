@@ -526,25 +526,113 @@ plot(m.decile1510[,"Decile1"], xlab="year", ylab="s-rtn",
 acf(as.numeric(m.decile1510[,"Decile1"]), lag.max=36,
     main="(b) Sample ACF")
 
-fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
-                  seasonal=list(order=c(1, 0, 1)))
+#fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
+#                  seasonal=list(order=c(1, 0, 1), period=12))
 #Error in solve.default(res$hessian * n.used) : 
 #  Lapack routine dgesv: system is exactly singular
 
-fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
-                  seasonal=list(order=c(1, 0, 1)),
+# work around:  
+fit.dec1 <- arima(as.numeric(m.decile1510[, "Decile1"]), c(1, 0, 0),
+                  seasonal=list(order=c(1, 0, 1), period=12))
+fit.dec1
+# The parameter estimates here are likely
+# slightly more accurate than those in the book.
+
+str(fit.dec1)
+# Find attribute 'sigma2'
+# via 'str' or reading help('arima')
+sqrt(fit.dec1$sigma2)
+
+fit.dec1CSS <- arima(as.numeric(m.decile1510[, "Decile1"]), c(1, 0, 0),
+                  seasonal=list(order=c(1, 0, 1), period=12),
                   method="CSS")
-#Error in optim(init[mask], armaCSS, method = "BFGS", hessian = TRUE, control = optim.control) : 
-#  initial value in 'vmmin' is not finite
+fit.dec1CSS
+sqrt(fit.dec1CSS$sigma2) 
+# Mostly match the conditional likelihood answers 
 
-fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
-                  seasonal=list(order=c(1, 0, 1)),
-                  optim.control=list(method="BFGS"))
-#Error in solve.default(res$hessian * n.used) : 
-#  Lapack routine dgesv: system is exactly singular
+# p. 78
+m.dec.index <- index(m.decile1510)
+str(m.dec.index)
+#Class 'Date'  num [1:528] -3625 -3594 -3563 -3534 -3502 ...
 
-fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
-                  seasonal=list(order=c(1, 0, 1)),
-                  optim.control=list(method="CG"))
-#Error in solve.default(res$hessian * n.used) : 
-#  Lapack routine dgesv: system is exactly singular
+Jan <- (months(m.dec.index)=="January")
+
+fitJan <- lm(m.decile1510[, "Decile1"] ~ Jan)
+
+rtn.jan <- residuals(fitJan)
+
+plot(rtn.jan, xlab="year", ylab="rtn - jan",
+     main="(c) January-adjusted returns")
+
+acf(as.numeric(rtn.jan), ylim=c(-.2, .3),
+    main="(d) Sample ACF")
+
+par(op)
+
+# p. 80
+##
+## sec. 2.9.  Regression Models with Time Series Errors
+##
+data(w.gs1n36299)
+# See ?ch02data:  
+w.gs1n3 <- window(w.gs1n36299, start=as.Date("1962-01-12"),
+    end=as.Date("1999-09-10"))
+
+# Figure 2.17
+plot(w.gs1n3[, "gs1"], xlab="year", ylab="percent")
+lines(w.gs1n3[, "gs3"], col="red", lty="dashed")
+
+# Figure 2.18
+op <- par(mfcol=c(1,2))
+plot(gs3~gs1, data=as.data.frame(w.gs1n3), xlab="1-year", ylab="3-year",
+     main="(a)")
+
+dw.gs1n3 <- diff(w.gs1n3)
+plot(gs3~gs1, data=as.data.frame(dw.gs1n3),
+     xlab="chg 1yr", ylab="chg 3yr", main="(b)")
+par(op)
+
+naiveFit <- lm(gs3~gs1, as.data.frame(w.gs1n3))
+summary(naiveFit)
+
+naive.resids <- residuals(naiveFit)
+
+# p. 82
+# Figure 2.19
+
+op <- par(mfrow=c(2,1))
+plot(index(w.gs1n3), naive.resids, type="l",
+     xlab='year', ylab='residual', main='(a)')
+
+acf(naive.resids, main='(b)')
+par(op)
+
+naiveFit.d.gs <- lm(gs3~gs1, as.data.frame(dw.gs1n3))
+summary(naiveFit.d.gs)
+
+# p. 83
+# Figure 2.20
+
+op <- par(mfrow=c(2,1))
+plot(dw.gs1n3[, "gs1"], ylim=c(-2, 2),
+     xlab="year", ylab="per. chg.", main="(a) Change in 1-year rate")
+plot(dw.gs1n3[, "gs3"], ylim=c(-2, 2),
+     xlab="year", ylab="per. chg.", main="(a) Change in 3-year rate")
+par(op)
+
+# p. 84
+# Figure 2.21
+naiveResids.d.gs <- residuals(naiveFit.d.gs)
+
+op <- par(mfrow=c(2,1))
+plot(index(dw.gs1n3), naiveResids.d.gs, type="l"
+     xlab="year", ylab="residual", main="a")
+
+acf(naiveResids.d.gs, main="(b)")
+par(op)
+
+fit.d.gs <- arima(dw.gs1n3[, "gs3"], c(1, 0, 0), xreg=dw.gs1n3[, "gs1"])
+fit.d.gs
+str(fit.d.gs)
+sqrt(fit.d.gs$sigma2)
+
