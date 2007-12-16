@@ -531,8 +531,17 @@ acf(as.numeric(m.decile1510[,"Decile1"]), lag.max=36,
 #Error in solve.default(res$hessian * n.used) : 
 #  Lapack routine dgesv: system is exactly singular
 
-# work around:  
-fit.dec1 <- arima(as.numeric(m.decile1510[, "Decile1"]), c(1, 0, 0),
+# 'arima' works fine in this case when 'zoo' (loaded with 'FinTS')
+# is NOT in the search path.  The problem is that 'arima' calls
+# 'as.ts(x)', and 'as.ts' is a generic function that acts
+# differently depending on whether 'zoo' is in the path.
+
+# To work around this, convert the 'index' from class 'Date'
+# to class 'yearmon', as indicated in the 'examples' in the
+# 'm.decile1510' help file:
+
+mDecile1510 <- zoo(m.decile1510, as.yearmon(index(m.decile1510)))
+fit.dec1 <- arima(mDecile1510[, "Decile1"], c(1, 0, 0),
                   seasonal=list(order=c(1, 0, 1), period=12))
 fit.dec1
 # The parameter estimates here are likely
@@ -543,7 +552,7 @@ str(fit.dec1)
 # via 'str' or reading help('arima')
 sqrt(fit.dec1$sigma2)
 
-fit.dec1CSS <- arima(as.numeric(m.decile1510[, "Decile1"]), c(1, 0, 0),
+fit.dec1CSS <- arima(mDecile1510[, "Decile1"], c(1, 0, 0),
                   seasonal=list(order=c(1, 0, 1), period=12),
                   method="CSS")
 fit.dec1CSS
@@ -631,8 +640,9 @@ plot(index(dw.gs1n3), naiveResids.d.gs, type="l"
 acf(naiveResids.d.gs, main="(b)")
 par(op)
 
-fit.d.gs <- arima(dw.gs1n3[, "gs3"], c(1, 0, 0), xreg=dw.gs1n3[, "gs1"])
-fit.d.gs
-str(fit.d.gs)
-sqrt(fit.d.gs$sigma2)
+fit.d.gs. <- ARIMA(dw.gs1n3[, "gs3"], c(1, 0, 0), xreg=dw.gs1n3[, "gs1"])
+fit.d.gs.
+str(fit.d.gs.)
+sqrt(fit.d.gs.$sigma2)
+fit.d.gs.$r.squared
 

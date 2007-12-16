@@ -41,6 +41,18 @@ ARIMA <- function(x, order = c(0, 0, 0),
 # 4.3.  Store 
   fit$Box.test <- LjB
 ##
+## 5.  'xreg'?  
+##
+  if(!is.null(xreg)){
+    varX <- var(xreg)
+    k <- dim(varX)[1]
+    if(length(k)==0)k <- 1 
+    b <- coef(fit)
+    bx <- b[length(b)-(k-1):0]
+    var.expl <- crossprod(varX %*% bx, bx)
+    fit$r.squared <- min(1, var.expl/var(x))
+  }
+##
 ## 5.  Done
 ##  
   fit

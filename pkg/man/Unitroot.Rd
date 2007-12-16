@@ -58,7 +58,7 @@ Unitroot(x, trend=c("c", "nc", "ct"), method=c('adf', 'McKinnon'),
 
   ur.df{urca} by Bernhard Pfaff
 
-  ADF.test{uroot} by Javier López-de-Lacalle
+  ADF.test{uroot} by Javier Lopez-de-Lacalle
 
   This 'Unitroot' function and the companion 'summary.fHTEST' use
   'adfTest'. It is provided for partial compatibility with the S-PLUS
@@ -80,7 +80,7 @@ Unitroot(x, trend=c("c", "nc", "ct"), method=c('adf', 'McKinnon'),
 \author{
   Adrian Trapletti and Diethelm Wuertz for the 'fUnitRoots' functions
   used, and Spencer Graves for the 'FinTS' interface, with help from
-  Javier López de Lacalle and Bernard Pfaff.  
+  Javier Lopez de Lacalle and Bernard Pfaff.  
 }
 \seealso{
   \code{\link[fUnitRoots]{UnitrootTests}}

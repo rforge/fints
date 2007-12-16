@@ -105,7 +105,8 @@ ARIMA(x, order = c(0, 0, 0),
   
 }
 \value{
-  an 'arima' object with an additional 'Box.test' component.
+  an 'arima' object with an additional 'Box.test' component and if
+  'xreg' is not null, an 'r.squared' component.  
 
   NOTE:  The 'Box.test' help page in R 2.6.0 says, 'Missing values are
   not handled.'  However, if 'x' contains NAs, 'ARIMA' still returns a
@@ -123,13 +124,16 @@ ARIMA(x, order = c(0, 0, 0),
   \code{\link[stats]{tsdiag}}
 }
 \examples{
+##
+## Examples from 'arima'
+##
 lh100 <- ARIMA(lh, order = c(1,0,0))
 lh100$Box.test
 # df = 3 = round(log(lh)) - 1
 # 2 parameters are estimated, but 1 is 'intercept',
 # so it doesn't count in the 'df' computation 
 
-lh300 <- ARIMA(lh, order = c(5,0,0))
+lh300 <- ARIMA(lh, order = c(3,0,0))
 lh300$Box.test
 # round(log(length(lh))) = 4 
 # Default Box.test.lag = min(5+1, 4) = 6, 
@@ -148,7 +152,8 @@ USAccD011$Box.test
 LakeH200 <- ARIMA(LakeHuron, order = c(2,0,0),
                   xreg = time(LakeHuron)-1920)
 LakeH200$Box.test
-# correct 'fd' with 'xreg' 
+# correct 'df' with 'xreg' 
+LakeH200$r.squared
 
 ## presidents contains NAs
 ## graphs in example(acf) suggest order 1 or 3
@@ -156,6 +161,15 @@ require(graphics)
 (fit1 <- ARIMA(presidents, c(1, 0, 0)))
 fit1$Box.test
 tsdiag(fit1)
+##
+## Example with multiple 'xreg' variables
+##
+tLH <- as.numeric(time(LakeHuron)-1920)
+tLH2 <- cbind(timeLH.1920 = tLH, time.sq = tLH*tLH)
+
+LakeH200. <- ARIMA(LakeHuron, order=c(2,0,0), xreg=tLH2)
+LakeH200.$r.squared
+
 }
 \keyword{ts}
 

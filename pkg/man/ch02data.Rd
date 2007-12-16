@@ -61,13 +61,15 @@ data(w.gs1n36299)
     (i.e. 0 to 10).  (Thus, it is not the 10th percentile.)  Decile 10
     means the returns of the top 10 percent of the companies (market
     cap).  Therefore, decile 1 is the smallest listed companies, and
-    decile 10 is for the largest companies. 
-  }
-  \item{m.gs3, m.gs5}{
-    Monthly 3-yr and 5-yr Treasury constant maturity rates
+    decile 10 is for the largest companies.
+
+    The 'index' of 'm.decile1510' has class 'Date'.  Since it's a
+    monthly series, it would be better for many purposes if it had
+    'index' of class 'yearmon'.  See the 'examples' below for how to
+    achieve this conversion.  
   }
   \item{w.gs1n36299}{
-    zoo object with two columns, 'ga1' and 'gs3', giving weekly 1-yr &
+    zoo object with two columns, 'gs1' and 'gs3', giving weekly 1-yr &
     3-yr interest rates from 1962-01-05 through 2007-11-02.  These data
     were reextracted from the Federal Reserve Bank at St. Louis to
     replace data from the book's web site that had obvious data quality
@@ -75,7 +77,7 @@ data(w.gs1n36299)
 
     To get data covering January 4, 1962, through September 10, 1999,
     use window(w.gs1n36299, start=as.Date("1962-01-12"),
-    end=as.Date("1999-09-10")). 
+    end=as.Date("1999-09-10"));  see 'examples' below.  
   }
 }
 %\details{
@@ -89,14 +91,27 @@ data(w.gs1n36299)
   Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
   ch. 2)
 }
-\keyword{datasets}
+\author{
+  Spencer Graves with help from Gabor Grothendieck.  
+}
 \seealso{ \code{\link{ch01data}} }
 \examples{
-# w.gs1n36299 covers a broader range than used in
-# Tsay (2005, sec. 2.9, pp. 80ff):  subset using 'window':
+##
+## m.decile1510 has 'index' of class 'Date'
+## Since it's a monthly series, for many purposes,
+## it should have 'index' of class 'yearmon'.
+## To get this, do the following:
+##
+data(m.decile1510)
+mDecile1510 <- zoo(m.decile1510, as.yearmon(index(m.decile1510)))
 
+##
+## w.gs1n36299 covers a broader range than used in
+## Tsay (2005, sec. 2.9, pp. 80ff):  subset using 'window':
+##
 data(w.gs1n36299)
 w.gs1n3 <- window(w.gs1n36299, start=as.Date("1962-01-12"),
     end=as.Date("1999-09-10"))
 }
+\keyword{datasets}
 
