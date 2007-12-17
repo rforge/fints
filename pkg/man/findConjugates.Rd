@@ -13,7 +13,16 @@ findConjugates(x, complex.eps=.Machine[["double.eps"]])
     a vector of complex numbers 
   }
   \item{complex.eps}{
-    a small positive number used to identify complex conjugates.
+    a small positive number used to identify complex conjugates:
+    x[i] and x[j] are considered conjugates if
+
+    (abs(x-Conj(x)) / max(abs(x[i], x[j]))) < complex.eps)
+
+    and
+
+    (abs(x[i]-x[j]) > complex.eps.
+
+    The latter condition excludes repeated roots.  
   }
 }
 \details{

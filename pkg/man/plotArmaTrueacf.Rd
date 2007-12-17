@@ -30,24 +30,13 @@ plotArmaTrueacf(object, lag.max=20, pacf=FALSE, plot=TRUE,
   \item{complex.eps}{
     a small positive number used to identify complex conjugates:  Let
     'roots' = the vector of p roots of the characteristic polynomial of
-    the autoregressive part of 'object'.  To identify complex conjugate
-    roots, consider the following:
+    the autoregressive part of 'object'.  This is used by
+    'findConjugates':  x[i] and x[j] are considered conjugate if their
+    relative difference exceeds complex.eps but the relative difference
+    of their conjugates is less than complex.eps.
 
-    DR = abs(roots[-1] - Conj(roots[-p]))/max(abs(roots[-1]),
-    abs(roots[-p])).
-    
-    RD = abs(roots[-1] - roots[-p])/max(abs(roots[-1]),
-    abs(roots[-p])). 
-
-    Theoretically, RD = 0 for the first of any complex conjugate pair of
-    roots.  However, this test will also identify duplicated real
-    roots.  The latter can be eliminated by looking for ((RD==0) &
-    (DR!=0)).  
-    
-    However, if ar = c(0.6, -0.4) and roots = polyroot(c(1, -ar)), R
-    2.6.0 returned RD = 1.97e-15, almost 20 times
-    '.Machine[["double.neg.eps"]]'.  Therefore, we identify the first of
-    complex conjugate pairs by ((RD<complex.eps) & (RD>complex.eps)).    
+    We use 'solve' in the 'polynom' package, because it was substially
+    more accurate for cases we tested in R 2.6.0 than 'polyroot'.     
   }
   \item{...}{
     optional arguments passed to 'plot'
@@ -96,7 +85,7 @@ plotArmaTrueacf(object, lag.max=20, pacf=FALSE, plot=TRUE,
   ch. 2)
 }
 \seealso{
-  \code{\link[base]{polyroot}}
+  \code{\link[polynom]{solve.polynomial}}
   \code{\link[stats]{ARMAacf}}
 }
 \examples{

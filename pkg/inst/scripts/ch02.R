@@ -1,4 +1,3 @@
-library(FinTS)
 ###
 ### 
 ### Ruey S. Tsay (2005)
@@ -10,6 +9,7 @@ library(FinTS)
 ###
 ### ch. 2.  Linear Time Series Analysis and Its Applications 
 ###
+library(FinTS)
 # p. 24
 
 # p. 25 
@@ -602,6 +602,7 @@ plot(gs3~gs1, data=as.data.frame(dw.gs1n3),
 par(op)
 
 naiveFit <- lm(gs3~gs1, as.data.frame(w.gs1n3))
+# comparable to 'fit=OLS(r3t~r1t)' on p. 86
 summary(naiveFit)
 
 naive.resids <- residuals(naiveFit)
@@ -617,6 +618,8 @@ acf(naive.resids, main='(b)')
 par(op)
 
 naiveFit.d.gs <- lm(gs3~gs1, as.data.frame(dw.gs1n3))
+# comparable to 'fit1=OLS(c3t~c11t) on p. 86
+# or 'reg.fit = OLS(dgs3~dgs1) on p. 88 
 summary(naiveFit.d.gs)
 
 # p. 83
@@ -640,9 +643,56 @@ plot(index(dw.gs1n3), naiveResids.d.gs, type="l"
 acf(naiveResids.d.gs, main="(b)")
 par(op)
 
-fit.d.gs. <- ARIMA(dw.gs1n3[, "gs3"], c(1, 0, 0), xreg=dw.gs1n3[, "gs1"])
-fit.d.gs.
-str(fit.d.gs.)
-sqrt(fit.d.gs.$sigma2)
-fit.d.gs.$r.squared
+fit.d.gs <- ARIMA(dw.gs1n3[, "gs3"], c(0, 0, 1), xreg=dw.gs1n3[, "gs1"])
+fit.d.gs
+#str(fit.d.gs)
+signif(sqrt(fit.d.gs$sigma2), 3)
+signif(fit.d.gs$r.squared, 4)
+
+# p. 85
+fit.d.gs0 <- ARIMA(dw.gs1n3[, "gs3"], c(0, 0, 1), xreg=dw.gs1n3[, "gs1"],
+                   include.mean=FALSE)
+fit.d.gs0
+signif(sqrt(fit.d.gs0$sigma2), 3)
+fit.d.gs0$r.squared
+
+# p. 86
+##
+## sec. 2.10.  Consistent covariance matrix estimaation 
+##
+
+# p. 88
+library(lmtest)
+library(sandwich) 
+coeftest(naiveFit.d.gs, vcovHC, type="HC1") 
+# 'type' = "HC1" uses (2.49), p. 87 
+# The default is "HC3".
+# In this case, the default gives the same answers.
+# In other cases, it may not.
+# t(gs1) = 45.9 vs. 46.7 in the book.
+# Close enough?  
+
+coeftest(naiveFit.d.gs, NeweyWest)
+# t(gs1) = 38.3 vs. 40.1 in the book.
+# Close enough? 
+
+# ARIMA fit:
+
+dim(dw.gs1n3)
+#  1965    2
+dw.gs1n3[1:4,]
+
+gs1.1 <- ts.intersect(as.ts(dw.gs1n3), d.gs1.1=lag(as.ts(dw.gs1n3)))
+dimnames(gs1.1)[[2]]
+dimnames(gs1.1)[[2]] <- c("gs1", "gs3", "gs1.1", "gs3.1")
+
+reg.ts <- lm(gs3~gs1+gs3.1+gs1.1, gs1.1)
+summary(reg.ts)
+
+# Close enough?  
+
+# p. 89
+##
+## 2.11.  Long memory models
+##
 

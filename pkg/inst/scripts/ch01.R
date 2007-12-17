@@ -1,4 +1,3 @@
-library(FinTS)
 ###
 ### 
 ### Ruey S. Tsay (2005)
@@ -10,6 +9,7 @@ library(FinTS)
 ###
 ### ch. 1.  Financial Time Series and Their Characteristics
 ###
+library(FinTS)
 
 ##
 ## sec. 1.1.  Assett Returns
