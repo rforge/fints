@@ -663,7 +663,8 @@ fit.d.gs0$r.squared
 
 # p. 88
 library(lmtest)
-library(sandwich) 
+library(sandwich)
+
 coeftest(naiveFit.d.gs, vcovHC, type="HC1") 
 # 'type' = "HC1" uses (2.49), p. 87 
 # The default is "HC3".
@@ -674,7 +675,17 @@ coeftest(naiveFit.d.gs, vcovHC, type="HC1")
 
 coeftest(naiveFit.d.gs, NeweyWest)
 # t(gs1) = 38.3 vs. 40.1 in the book.
-# Close enough? 
+# Close enough?
+
+# For more information on 'coeftest', 'vcovHC', and 'NeweyWest', see
+# (sandw <- vignette("sandwich")) 
+# Stangle(sandw$file)
+#
+# and
+#
+# (swo <- vignette("sandwich-OOP"))
+# Stangle(swo$file) 
+
 
 # ARIMA fit:
 
@@ -696,3 +707,25 @@ summary(reg.ts)
 ## 2.11.  Long memory models
 ##
 
+# p. 90
+data(d.ibmvwewsp6203)
+str(d.ibmvwewsp6203)
+d.CRSP6297 <- window(d.ibmvwewsp6203, end=as.Date("1997-12-31"))
+dim(d.CRSP6297)
+# 8938 4
+abs.VW <- abs(d.CRSP6297[, "VW"])
+sum(is.na(abs.VW))
+# 0
+abs.VW. <- as.ts(abs.VW)
+str(abs.VW.)
+# 12966 obs ... 
+acf(as.numeric(abs.VW), lag.max=400, ylim=c(-.1, .4))
+# Matches Figure 2.22(a) 
+acf(abs.VW, lag.max=400, ylim=c(-.1, .4), na.action=na.pass)
+# Different from Figure 2.22(a):
+# This assumes we have 365.24 days/year,
+# with NAs for weekends and holidays.
+# Figure 2.22(a) ignores weekends and holidays,
+# assuming that Monday follows Friday (except when there is a holiday).
+
+acf(as.numeric(abs(d.CRSP6297[, "EW"])), lag.max=400, ylim=c(-.1, .4))

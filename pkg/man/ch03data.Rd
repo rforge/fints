@@ -25,10 +25,10 @@ data(d.sp8099  )
 }
 \format{
   Three data stes used in chapter 3 are also used in chapter 1 or 2 and
-  are documented with 'ch01data' or 'ch02data':  'm.intc7303' and
-  'd.ibmvwewsp6203' are used in both chapters 1 and 3 and are documented
-  with 'ch01data';  'm.ibm2697' is used in both chapters 2 and 3 is
-  documented with ch02data.
+  are documented with 'ch01data' or 'ch02data':  In particular,
+  'm.intc7303' and 'd.ibmvwewsp6203' are used in chapters 1 and 3 and
+  are documented with 'ch01data';  'm.ibm2697' is used in chapters 2 and
+  3 is documented with ch02data.
 
   The other data sets used in chapter 3 are as follows:  
 
