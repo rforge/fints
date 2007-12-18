@@ -16,9 +16,7 @@ library(FinTS)
 ##
 
 # p. 4
-##
-## Table 1.1.  Illustration of the effects of compounding
-##
+# Table 1.1.  Illustration of the effects of compounding
 frequencies <- c(1, 2, 4, 12, 52, 365, Inf)
 (Table1.1 <- data.frame(Type=c(
     "Annual", "Semiannual", "Quarterly",
@@ -29,9 +27,7 @@ frequencies <- c(1, 2, 4, 12, 52, 365, Inf)
     frequency=frequencies) ) )
 
 # p.  6  
-##
-## Example 1.1.
-##
+# Example 1.1.
 logRtn <- .0446
 100*expm1(logRtn)
 
@@ -45,9 +41,7 @@ mo.logRtns <- c(.0446, -.0734, .1077)
 # sec. 1.2.1.  Review of Statistical Distributions and their Moments
 
 # p. 10
-##
-## Example 1.2.
-## 
+# Example 1.2.
 data(d.ibmvwewsp6203)
 s.ibm <- sd(d.ibmvwewsp6203[, "IBM"])
 (skew.ibm <- skewness(d.ibmvwewsp6203[, "IBM"]))
@@ -62,10 +56,8 @@ library(moments)
 (skew.test <- agostino.test(as.numeric(d.ibmvwewsp6203[, "IBM"])))
 
 # p. 11
-##
-## Table 1.2.  Descriptive Statistics for Daily and Monthly
-##             Simple and Log Returns for Selected Indexes and Stocks
-##
+# Table 1.2.  Descriptive Statistics for Daily and Monthly
+#             Simple and Log Returns for Selected Indexes and Stocks
 data(d.ibmvwewsp6203)
 data(d.intc7303)
 data(d.3m6203)
