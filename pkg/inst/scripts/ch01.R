@@ -181,9 +181,9 @@ par(op)
 if(require(logspline)){
 
   m.ibm <- m.ibmvwewsp2603[, "IBM"]
-  dens.ibm.rtns <- logspline(100*m.ibm)
+  dens.ibm.rtns <- logspline(100*as.numeric(m.ibm))
   m.log.ibm <- 100*log(1+m.ibm)
-  dens.ibm.logrtns <- logspline(m.log.ibm)
+  dens.ibm.logrtns <- logspline(as.numeric(m.log.ibm))
 
   op <- par(mfrow=c(1,2))
   plot(dens.ibm.rtns, xlim=c(-40, 40), xlab="simple returns", ylab="density")
