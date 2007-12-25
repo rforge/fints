@@ -43,7 +43,8 @@ data(d.sp8099  )
     object of class 'zooreg' giving the monthly excess returns of the
     S&P 500 index starting from 1926.  This zooreg object is labeled
     assuming it starts in January, though the book does not say whether
-    it starts in January or just some time in 1926.  
+    it starts in January or just some time in 1926.  (Many of the files
+    included date with the data, but 'sp500.dat' did not.)  
   }
   \item{m.ibmspln}{
     object of class 'zooreg' giving the monthly log returns of IBM stock
