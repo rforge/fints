@@ -17,14 +17,14 @@ library(FinTS)
 
 # p. 4
 # Table 1.1.  Illustration of the effects of compounding
-frequencies <- c(1, 2, 4, 12, 52, 365, Inf)
+freqs <- c(1, 2, 4, 12, 52, 365, Inf)
 (Table1.1 <- data.frame(Type=c(
     "Annual", "Semiannual", "Quarterly",
     "Monthly", "Weekly", "Daily", "Continuously"),
-  Number.of.payments=frequencies, 
-  Interest.rate.per.period=0.1/frequencies,
+  Number.of.payments=freqs, 
+  Interest.rate.per.period=0.1/freqs,
   Net.Value=compoundInterest(0.1,
-    frequency=frequencies) ) )
+    frequency=freqs) ) )
 
 # p.  6  
 # Example 1.1.
