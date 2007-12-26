@@ -5,7 +5,7 @@
   Ljung-Box test for autocorrelation 
 }
 \usage{
-autocorTest(x, lag=log(length(x)))
+autocorTest(x, lag=ceiling(log(length(x))))
 }
 \arguments{
 
