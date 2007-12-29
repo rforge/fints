@@ -347,11 +347,13 @@ plot(log(1+m.3m4697), xlab="year", ylab="l-rtn")
 acf(as.numeric(m.3m4697), main="")
 par(op)
 
-# What to do about EACF?
-# Question sent to Prof. Tsay 2007.12.01
-
-
-
+eacf.3m <- eacf(m.3m4697, 6, 12)
+print(eacf.3m, 2) 
+print(eacf.3m) 
+# DOES NOT MATCH TABLE 2.5.
+# I don't know why, but I'm not going to worry about it now.
+# Question referred to Prof. Tsay 2007.12.29.
+write.table(eacf.3m, "eacf-3m.csv", sep=",")
 
 # p. 64 
 ##
