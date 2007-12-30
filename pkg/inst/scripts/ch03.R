@@ -27,9 +27,11 @@ data(m.intc7303)
 ml.intc <- log(1+m.intc7303)
 
 op <- par(mfcol=c(2,2))
-acf(as.numeric(ml.intc), main="(a) Log returns", ylim=c(-.2, .4))
-acf(as.numeric(ml.intc)^2, main="(b) Squared log returns", ylim=c(-.2, .4))
-acf(abs(as.numeric(ml.intc)), main="(c) Absolute log returns", ylim=c(-.2, .4)) 
+acf(as.numeric(ml.intc), main="(a) Log returns", ylim=c(-.2, .4), acfLag0=FALSE)
+acf(as.numeric(ml.intc)^2, main="(b) Squared log returns", ylim=c(-.2, .4),
+    acfLag0=FALSE)
+acf(abs(as.numeric(ml.intc)), main="(c) Absolute log returns", ylim=c(-.2, .4),
+    acfLag0=FALSE) 
 pacf(as.numeric(ml.intc)^2, main="(b) Squared log returns", ylim=c(-.2, .4))
 par(op) 
 
@@ -76,7 +78,7 @@ par(op)
 # Figure 3.3
 
 op <- par(mfrow=c(2,1))
-acf(exch.perc, ylim=c(-.1, .1), main="(a) Sample ACF")
+acf(exch.perc, ylim=c(-.1, .1), main="(a) Sample ACF", acfLag0=FALSE)
 
 pacf(exch.perc^2, ylim=c(-.1, .1),
      main="(b) Partial ACF of the squared series")
@@ -162,15 +164,7 @@ abline(h=0, lty="dashed")
 
 # Figure 3.6 
 op <- par(mfrow=c(2,1))
-sp500acf <- acf(sp500, plot=FALSE, lag.max=30)
-str(sp500acf)
-plot(sp500acf, ylim=range(sp500acf$acf[-1]),
-     xlab="lag", main="(a)", type="h")
-plot(0:30, sp500acf$acf, ylim=range(sp500acf$acf[-1]),
-     xlab="lag", main="(a)", type="h")
-abline(h=0)
-tst <- acf(sp500, ylim=range(sp500acf$acf[-1]),
-     xlab="lag (years)", main="(a)", lag.max=30)
+acf(sp500, lag.max=30, main="(a)", acfLag0=FALSE)
 pacf(sp500^2, main="(b)")
 par(op)
 
@@ -192,8 +186,8 @@ par(op)
 # p. 119
 # Figure 3.8
 op <- par(mfrow=c(2,1))
-acf(std.res, ylim=c(-.2, .2), main="(a)", lag.max=24)
-acf(std.res^2, ylim=c(-.2, .2), main="(b)", lag.max=24)
+acf(std.res, ylim=c(-.2, .2), main="(a)", lag.max=24, acfLag0=FALSE)
+acf(std.res^2, ylim=c(-.2, .2), main="(b)", lag.max=24, acfLag0=FALSE)
 par(op)
 
 AutocorTest(std.res, 12)

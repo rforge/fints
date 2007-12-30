@@ -29,9 +29,9 @@ str(m.ibm2697)
 quantile(as.numeric(m.ibm2697))
 op <- par(mfrow=c(2,1))
 acf(m.ibm2697, ylim=c(-.2, .2), lag.max=100,
-    main="(a) Simple returns")
+    main="(a) Simple returns", acfLag0=FALSE)
 acf(log(1+m.ibm2697), ylim=c(-.2, .2), lag.max=100,
-    main="(b) Log returns")
+    main="(b) Log returns", acfLag0=FALSE)
 par(op)
 
 Box.test(m.ibm2697, 5, "Ljung-Box")
@@ -52,9 +52,9 @@ AutocorTest(log(1+m.ibm2697), 10)
 data(m.vw2697)
 op <- par(mfrow=c(2, 1))
 acf(m.vw2697, ylim=c(-.2, .2), lag.max=100,
-    main="(a) Simple returns")
+    main="(a) Simple returns", acfLag0=FALSE)
 acf(log(1+m.vw2697), ylim=c(-.2, .2), lag.max=100,
-    main="(b) Log returns")
+    main="(b) Log returns", acfLag0=FALSE)
 par(op)
 
 # R function in stats package 
@@ -302,7 +302,7 @@ op <- par(mfrow=c(2,1))
 plot(m.ibmvwewsp2603[, "EW"], main="(a) Monthly simple returns",
      xlab="year", ylab="s-rtn")
 acf(as.numeric(m.ibmvwewsp2603[, "EW"]), ylim=c(-.4, .4),
-    main="(b) Sample ACF")
+    main="(b) Sample ACF", acfLag0=FALSE)
 par(op)
 
 # p. 54
@@ -482,20 +482,20 @@ par(op)
 # Figure 2.14.  
 op <- par(mfcol=c(2,2))
 acf(log(q.jnj))
-acf(diff(log(q.jnj)))
-acf(diff(log(q.jnj), 4))
+acf(diff(log(q.jnj)), main="Series:  dx")
+acf(diff(log(q.jnj), 4), main="Series:  ds")
 
 dxds <- diff(diff(log(q.jnj)), 4)
 dsdx <- diff(diff(log(q.jnj), 4))
 all.equal(dxds, dsdx)
 # TRUE 
-acf(dxds)
+acf(dxds, main="Series:  dxds")
 par(op)
 
 # p. 76
 # Example 2.3
 
-(fit.jnj <- arima(log(q.jnj), order=c(0, 1, 1),
+x(fit.jnj <- arima(log(q.jnj), order=c(0, 1, 1),
                  seasonal=list(order=c(0, 1, 1))))
 #str(fit.jnj)
 sqrt(fit.jnj$sigma2)
@@ -520,13 +520,14 @@ lines(exp(ll), col="red", lty="dashed")
 data(m.decile1510)
 str(m.decile1510)
 
+# p. 78
 op <- par(mfcol=c(2,2))
 
 plot(m.decile1510[,"Decile1"], xlab="year", ylab="s-rtn",
      main="(a) Simple returns")
 
 acf(as.numeric(m.decile1510[,"Decile1"]), lag.max=36,
-    main="(b) Sample ACF")
+    main="(b) Sample ACF", acfLag0=FALSE)
 
 #fit.dec1 <- arima(m.decile1510[, "Decile1"], c(1, 0, 0),
 #                  seasonal=list(order=c(1, 0, 1), period=12))
@@ -561,7 +562,6 @@ fit.dec1CSS
 sqrt(fit.dec1CSS$sigma2) 
 # Mostly match the conditional likelihood answers 
 
-# p. 78
 m.dec.index <- index(m.decile1510)
 str(m.dec.index)
 #Class 'Date'  num [1:528] -3625 -3594 -3563 -3534 -3502 ...
@@ -575,8 +575,7 @@ rtn.jan <- residuals(fitJan)
 plot(rtn.jan, xlab="year", ylab="rtn - jan",
      main="(c) January-adjusted returns")
 
-acf(as.numeric(rtn.jan), ylim=c(-.2, .3),
-    main="(d) Sample ACF")
+acf(as.numeric(rtn.jan), main="(d) Sample ACF", acfLag0=FALSE)
 
 par(op)
 
@@ -639,8 +638,8 @@ par(op)
 naiveResids.d.gs <- residuals(naiveFit.d.gs)
 
 op <- par(mfrow=c(2,1))
-plot(index(dw.gs1n3), naiveResids.d.gs, type="l"
-     xlab="year", ylab="residual", main="a")
+plot(index(dw.gs1n3), naiveResids.d.gs, type="l", 
+     xlab="year", ylab="residual", main="(a)")
 
 acf(naiveResids.d.gs, main="(b)")
 par(op)
@@ -721,7 +720,8 @@ sum(is.na(abs.VW))
 abs.VW. <- as.ts(abs.VW)
 str(abs.VW.)
 # 12966 obs ... 
-acf(as.numeric(abs.VW), lag.max=400, ylim=c(-.1, .4))
+acf(as.numeric(abs.VW), lag.max=400, ylim=c(-.1, .4),
+    main="ACF of absolute returns of value-weighted index", acfLag0=FALSE)
 # Matches Figure 2.22(a) 
 acf(abs.VW, lag.max=400, ylim=c(-.1, .4), na.action=na.pass)
 # Different from Figure 2.22(a):
@@ -730,4 +730,5 @@ acf(abs.VW, lag.max=400, ylim=c(-.1, .4), na.action=na.pass)
 # Figure 2.22(a) ignores weekends and holidays,
 # assuming that Monday follows Friday (except when there is a holiday).
 
-acf(as.numeric(abs(d.CRSP6297[, "EW"])), lag.max=400, ylim=c(-.1, .4))
+acf(as.numeric(abs(d.CRSP6297[, "EW"])), lag.max=400, ylim=c(-.1, .4),
+    main="ACF of absolute returns of equal-weighted index", acfLag0=FALSE)
