@@ -20,7 +20,6 @@ AutocorTest(x, lag=ceiling(log(length(x))))
     for which autocorrelations with lags at multiples of the seasonality
     are more important."  
   }
-
 }
 \details{
   This is provided for compatibility with 'autocorTest' in the S-Plus

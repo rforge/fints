@@ -99,10 +99,25 @@ ARIMA(x, order = c(0, 0, 0),
 
   3.  Apply 'Box.test' to the whitened residuals.  
 
-  4.  Correct the degrees of freedom and p-value in Box.test.
-  Specifically, the corrected 'parameter' = the naive 'parameter' minus
-  the number of parameters estimated, apart from any named 'intercept'.
-  
+  4.  Compute the p-value in 'Box.test' using degrees of freedom =
+  Box.test.lag minus the number of parameters estimated, apart from any
+  named 'intercept'.
+
+  NOTE:  Michal Miklovic asked R-SIG-Finance about 'ljung-box tests in
+  arma and garch models' on 2007.12.27.  He noted, 'In EViews, TSP and
+  other statistical software,' the Ljung-Box was referred to a
+  chi-square distribution with degrees of freedom adjusted for
+  parameters estimated, as here.  However, 'In R and fArma and fGarch
+  packages, the arma and garch orders are disregarded in the computation
+  of degrees of freedom for the Ljung-Box' statistic.  Tsay adjusts, and
+  Burns (2002) does not.
+
+  It would help to have simulation studies of the distribution of the
+  Ljung-Box statistic, estimating degrees of freedom and evaluating
+  goodness of fit.  Burns recommends a rank version of the Ljung-Box
+  test, but does not estimate degrees of freedom.  If you have done such
+  a simulation or know of a reference describing such, would you please
+  notify the maintainer of this package? 
 }
 \value{
   an 'arima' object with an additional 'Box.test' component and if
@@ -117,6 +132,11 @@ ARIMA(x, order = c(0, 0, 0),
 \references{
   Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
   ch. 2)
+
+  Patrick Burns (2002) 'Robustness of the Ljung-Box Test and its Rank
+  Equivalent',
+  \url{http://www.burns-stat.com/pages/Working/ljungbox.pdf}, accessed
+  2007.12.29.  
 }
 \seealso{
   \code{\link[stats]{arima}}

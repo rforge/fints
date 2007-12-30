@@ -40,11 +40,11 @@ Box.test(m.ibm2697, 10, "Ljung-Box")
 Box.test(log(1+m.ibm2697), 5, "Ljung-Box")
 Box.test(log(1+m.ibm2697), 10, "Ljung-Box")
 
-autocorTest(m.ibm2697, 5)
-autocorTest(m.ibm2697, 10)
+AutocorTest(m.ibm2697, 5)
+AutocorTest(m.ibm2697, 10)
 
-autocorTest(log(1+m.ibm2697), 5)
-autocorTest(log(1+m.ibm2697), 10)
+AutocorTest(log(1+m.ibm2697), 5)
+AutocorTest(log(1+m.ibm2697), 10)
 
 # p. 29  
 # Figure 2.2.  Sample ACFs of monthly simple and log returns
@@ -65,11 +65,11 @@ Box.test(log(1+m.vw2697), 5, "Ljung-Box")
 Box.test(log(1+m.vw2697), 10, "Ljung-Box")
 
 # FinTS function in Tsay, p. 30 
-autocorTest(m.vw2697, 5)
-autocorTest(m.vw2697, 10)
+AutocorTest(m.vw2697, 5)
+AutocorTest(m.vw2697, 10)
 
-autocorTest(log(1+m.vw2697), 5)
-autocorTest(log(1+m.vw2697), 10)
+AutocorTest(log(1+m.vw2697), 5)
+AutocorTest(log(1+m.vw2697), 10)
 
 # p. 31
 ##

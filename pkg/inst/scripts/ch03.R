@@ -44,7 +44,7 @@ par(op)
 data(m.intc7303)
 str(m.intc7303)
 
-autocorTest(log(1+as.numeric(m.intc7303)), lag=12)
+AutocorTest(log(1+as.numeric(m.intc7303)), lag=12)
 
 #archTest(log(1+as.numeric(m.intc7303)), lag=12)
 # doesn't work.  
@@ -196,11 +196,11 @@ acf(std.res, ylim=c(-.2, .2), main="(a)", lag.max=24)
 acf(std.res^2, ylim=c(-.2, .2), main="(b)", lag.max=24)
 par(op)
 
-autocorTest(std.res, 12)
-autocorTest(std.res, 24)
+AutocorTest(std.res, 12)
+AutocorTest(std.res, 24)
 
-autocorTest(std.res^2, 12)
-autocorTest(std.res^2, 24)
+AutocorTest(std.res^2, 12)
+AutocorTest(std.res^2, 24)
 
 # p. 120
 # Since the 'arma' part of the model is nothing,
@@ -251,6 +251,3 @@ pred.s2.t["Inf"] <- (vCoef["omega"] /
                 (1-(vCoef["alpha1"] + vCoef["beta1"])) ) 
 round(sqrt(pred.s2.t), 5)
 
-# Conclusion:
-# Since my computation of the asymptote
-# conflicted with the table, I asked Prof. Tsay to check.  
