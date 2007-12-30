@@ -58,9 +58,9 @@ eacf(x, ar.max=7, ma.max=13)
   'x' itself is returned. 
 }
 \author{
-  K. S. Chan, Department of Statistics and Actuarial Science, University
-  of Iowa, for the original 'eacf' code;  Spencer Graves for the
-  documentation.   
+  Kung-Sik Chan, Department of Statistics and Actuarial Science,
+  University of Iowa, for the original 'eacf' code;  Spencer Graves for
+  the documentation.   
 }
 \source{
   

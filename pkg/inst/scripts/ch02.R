@@ -350,10 +350,8 @@ par(op)
 eacf.3m <- eacf(m.3m4697, 6, 12)
 print(eacf.3m, 2) 
 print(eacf.3m) 
-# DOES NOT MATCH TABLE 2.5.
-# I don't know why, but I'm not going to worry about it now.
-# Question referred to Prof. Tsay 2007.12.29.
-write.table(eacf.3m, "eacf-3m.csv", sep=",")
+# This may be due to differences in how the arima parameters
+# are estimated, e.g, maximum likelihood vs. Yule-Walker.  
 
 # p. 64 
 ##

@@ -101,23 +101,21 @@ ARIMA(x, order = c(0, 0, 0),
 
   4.  Compute the p-value in 'Box.test' using degrees of freedom =
   Box.test.lag minus the number of parameters estimated, apart from any
-  named 'intercept'.
+  named 'intercept'.  
 
-  NOTE:  Michal Miklovic asked R-SIG-Finance about 'ljung-box tests in
-  arma and garch models' on 2007.12.27.  He noted, 'In EViews, TSP and
-  other statistical software,' the Ljung-Box was referred to a
-  chi-square distribution with degrees of freedom adjusted for
-  parameters estimated, as here.  However, 'In R and fArma and fGarch
-  packages, the arma and garch orders are disregarded in the computation
-  of degrees of freedom for the Ljung-Box' statistic.  Tsay adjusts, and
-  Burns (2002) does not.
+  NOTE:  Some software does not adjust the degrees of freedom for the
+  number of parameters estimated.  Tsay (2005) and Enders (2004) do.
+  The need to adjust the degrees of freedom discussed by Brockwell and
+  Davis (1990), who provide a proof describing the circumstances under
+  which this is appropriate. 
 
-  It would help to have simulation studies of the distribution of the
-  Ljung-Box statistic, estimating degrees of freedom and evaluating
-  goodness of fit.  Burns recommends a rank version of the Ljung-Box
-  test, but does not estimate degrees of freedom.  If you have done such
-  a simulation or know of a reference describing such, would you please
-  notify the maintainer of this package? 
+  This is, however, an asymptotic result, and it would help to have
+  simulation studies of the distribution of the Ljung-Box statistic,
+  estimating degrees of freedom and evaluating goodness of fit.  Burns
+  recommends a rank version of the Ljung-Box test, but does not estimate
+  degrees of freedom.  If you have done such a simulation or know of a
+  reference describing such, would you please notify the maintainer of
+  this package? 
 }
 \value{
   an 'arima' object with an additional 'Box.test' component and if
@@ -130,6 +128,15 @@ ARIMA(x, order = c(0, 0, 0),
   or the answer can not be trusted with NAs.  
 }
 \references{
+  Brockwell and Davis (1990) Time Series: Theory and Methods, 2nd
+  Edition (Springer, page 310).
+
+  Walter Enders (2004) Applied Econometric Time Series (Wiley,
+  pp. 68-69)
+
+  Greta Ljung and George E. P. Box (1978) 'On a measure of lack of fit
+  in time series models', Biometrika, 66: 67-72.  
+  
   Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
   ch. 2)
 
@@ -137,6 +144,15 @@ ARIMA(x, order = c(0, 0, 0),
   Equivalent',
   \url{http://www.burns-stat.com/pages/Working/ljungbox.pdf}, accessed
   2007.12.29.  
+}
+\author{
+  Spencer Graves for the ARIMA{FinTS} wrapper for \link[stats]{arima},
+  written by the R Core Team, and \link[stats]{Box.text}, written by
+  A. Trapletti.  John Frain provided the citation to a proof in
+  Brockwell and Davis (1990) that the degrees of freedom for the
+  approximating chi-square distribution of the Ljung-Box statistic
+  should be adjusted for the number of parameters estimated.  Michal
+  Miklovic provided the citation to Enders (2004).  
 }
 \seealso{
   \code{\link[stats]{arima}}
