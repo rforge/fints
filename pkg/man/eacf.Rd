@@ -77,10 +77,11 @@ eacf(x, ar.max=7, ma.max=13)
 data(m.3m4697)
 EACF.3m <- eacf(m.3m4697, 6, 12)
 print(EACF.3m, 2)
-print(EACF.3m) 
-# DOES NOT MATCH TABLE 2.5.
-# I don't know why, but I'm not going to worry about it now.
-# Question referred to Prof. Tsay 2007.12.29.
+print(EACF.3m)
+# Close to Table 2.5 but not exactly.
+# There appear to be minor differences in the algorithms
+# between this function and SCA used for the book.  
+
 }
 \keyword{ts}
 

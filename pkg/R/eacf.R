@@ -93,36 +93,41 @@ print.eacf <- function(x, symbols=c("O", "X"), ...){
   nobs <- attr(x, 'nobs') 
   if(is.character(symbols) && (length(symbols)>1)
      && is.numeric(nobs) && (nobs[1]>sum(nam)) ){
-    EACF <- array(NA, dim=nam)
+    EACF <- array(NA, dim=nam, dimnames=dimnames(x))
 #
+    pad <- function(a){
+      na <- nchar(a)
+      need <- max(na)-na
+      if(all(need<1))return(a)
+#
+      a[need>0] <- paste(" ", a[need>0], sep="")
+      pad(a) 
+    }
+#    
     work <- nobs-(0:(nam[1]-1))
-    nch <- nchar(symbols)
-    cat('AR/MA\n')
+    symb <- pad(symbols) 
 #
-    Nch <- max(nch)
-    symb <- paste(rep(" ", length=Nch-nch), symbols, sep="") 
     for(im in 1:nam[2]){
       work <- work-1
-      EACF[, im] <- symb[1+(x[, im]>2/sqrt(work))]
+      EACF[, im] <- symb[1+(abs(x[, im])>2/sqrt(work))]
     }
 #
     cat('AR/MA\n')
-    mao <- as.character(1:nam[2])
-    colps <- " "
-    if(nam[2]>9){
-      mao <- c(paste(" ", mao[1:9], sep=""), 10:nam[2])
-      colps <- "  "
-    }
-    nUnd <- (nchar(colps)+1)*nam[2]
+#
+    colNms <- pad(dimnames(x)[[2]])
+    nchC <- nchar(colNms[1])
+#    
+    rowNms <- paste(paste(rep(" ", nchC-1), collapse=""),
+                    pad(dimnames(x)[[1]]), sep="")
+#
+    colps <- paste(rep(" ", nchC), collapse="")
+    nUnd <- (nchC+1)*nam[2]
     cat(paste(rep(" ", length=nUnd/2.3), collapse=""), "MA order: q\n")
     cat("___", paste(rep("_", length=nUnd), collapse=""), "\n")
-    cat(" p |", paste(mao, collapse=" "), "\n")
+    cat(" p |", paste(colNms, collapse=" "), "\n")
     cat("___", paste(rep("_", length=nUnd), collapse=""), "\n")
-    for(ia in 1:nam[1]){
-      ar. <- as.character(ia)
-      if(ia<10)ar. <- paste(" ", ar., sep="")
-      cat(ar., "| ", paste(EACF[ia, ], collapse=colps), "\n")
-    }
+    for(ia in 1:nam[1])
+      cat(rowNms[ia], "| ", paste(EACF[ia, ], collapse=colps), "\n")
 #
     return(invisible(EACF))
   }
