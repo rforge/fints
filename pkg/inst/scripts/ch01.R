@@ -210,7 +210,8 @@ qqnorm(m.log.ibm, datax=TRUE)
 ##
 ## 1.3.  Processes Considered
 ##
-
+data(m.gs10)
+data(m.gs1)
 # Figure 1.5.  Time plot of US monthly interest rates 
 op <- par(mfrow=c(2,1))
 plot(m.gs10, xlab="year", ylab="rate", type="l")
@@ -222,7 +223,7 @@ par(op)
 # p. 21
 # Figure 1.6.  Time plot of daily exchange rate
 #              between US dollara and Japanese Yen 
-
+data(d.fxjp00)
 op <- par(mfrow=c(2,1))
 plot(d.fxjp00, xlab="year", ylab="Yens", type="l")
 plot(diff(d.fxjp00), xlab="year", ylab="Change", type="l")
@@ -230,19 +231,25 @@ par(op)
 
 # p. 22
 # Table 1.3.  Descriptive Statistics of Selected US Financial Time Series
-
+data(m.fama.bond5203)
 (m.bondRtns <- rbind(
   "1-12 months"=FinTS.stats(100*m.fama.bond5203[, "m1.12"]), 
   "24-36 months"=FinTS.stats(100*m.fama.bond5203[, "m24.36"]), 
   "48-60 months"=FinTS.stats(100*m.fama.bond5203[, "m48.60"]), 
   "61-120 months"=FinTS.stats(100*m.fama.bond5203[, "m61.120"]) ))
 
+data(m.gs1)
+data(m.gs3)
+data(m.gs5)
+data(m.gs10)
 (m.treasuryRtns <- rbind(
   "1 year"=FinTS.stats(m.gs1),
   "3 years"=FinTS.stats(m.gs3),
   "5 years"=FinTS.stats(m.gs5),
   "10 years"=FinTS.stats(m.gs10) ))
 
+data(w.tb3ms)
+data(w.tb6ms)
 (w.treasuryRtns <- rbind(
   "3 months"=FinTS.stats(w.tb3ms),
   "6 months"=FinTS.stats(w.tb6ms) ) )
