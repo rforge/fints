@@ -45,11 +45,14 @@ eacf(x, ar.max=7, ma.max=13)
   
   The 'print' method prints a coded EACF table with significant values
   denoted by 'X' and nosignificant values by 'O', significance level
-  being 0.05. 
+  being 0.05.  A number in the table is considered significant if its
+  absolute value exceeds 2/(nobs-p-q), where nobs = length(x), and p and
+  q are the AR and MA orders, resepctively.  
 }
 \value{
   for 'eacf':  an object of class 'eacf', being a numeric matrix of
-  dimensions (ar.max+1) x (ma.max+1) and an attribute 'nobs'.
+  dimensions (ar.max+1) x (ma.max+1) and an attribute 'nobs' =
+  length(x).  
 
   for 'print.eacf':  return(invisible(...) something:  If symbols is a
   character vector of length 2 and attr(x, 'nobs) exceeds sum(dim(x)),
