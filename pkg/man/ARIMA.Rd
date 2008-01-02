@@ -6,11 +6,12 @@
 }
 \usage{
 ARIMA(x, order = c(0, 0, 0),
-      seasonal = list(order = c(0, 0, 0), period = NA),
-      xreg = NULL, include.mean = TRUE, transform.pars = TRUE,
-      fixed = NULL, init = NULL, method = c("CSS-ML", "ML", "CSS"),
-      n.cond, optim.control = list(), kappa = 1e6,
-      Box.test.lag=NULL, type = c("Ljung-Box", "Box-Pierce"))
+     seasonal = list(order = c(0, 0, 0), period = NA),
+     xreg = NULL, include.mean = TRUE, transform.pars = TRUE,
+     fixed = NULL, init = NULL, method = c("CSS-ML", "ML", "CSS"),
+     n.cond, optim.control = list(), kappa = 1e6, Box.test.lag=NULL,
+     Box.test.df = c("net.lag", "lag"), 
+     type = c("Ljung-Box", "Box-Pierce", "rank"))
 }
 \arguments{
   \item{x}{
@@ -79,17 +80,31 @@ ARIMA(x, order = c(0, 0, 0),
 
     The default is the minimum of the following:
 
-    round(log(sum(!is.na(x)))), recommended by Tsay (p. 27)
+%    \itemize{
+      round(log(sum(!is.na(x)))), recommended by Tsay (p. 27)
 
-    One more than the number of parameters estimated, not counting any
-    'intercept' in the model.    
+      One more than the number of parameters estimated, not counting any
+      'intercept' in the model.
+%    }
+  }
+  \item{Box.test.df}{
+    numeric or character variable indicating the degrees of freedom for
+    the ch-square approximation to the distribution of the Box.test
+    statistic.  The default 'net.lag' is 'Box.test.lag' minus the number
+    of relevant parameters estimated.  The primary alternative 'lag' is
+    the number of lags included in the computation of the statistic.
+
+    A positive number can also be provided.  
   }
   \item{type}{
     which Box.test 'type' should be used?  Partial matching is used.
 
-    NOTE:  The default 'type' is the more accurate and popular
-    'Ljung-Box', not the earlier 'Box-Pierce', which is the default for
-    'Box.test'.  
+    The 'rank' alternative computes 'Ljung-Box' on rank(x);  see Burns
+    (2002) and references therein.    
+
+    NOTE:  The default 'Ljung-Box' type generally seems to be more
+    accurate and popular than the earlier 'Box-Pierce', which is however
+    the default for 'Box.test'. 
   }
 }
 \details{
@@ -135,7 +150,7 @@ ARIMA(x, order = c(0, 0, 0),
   pp. 68-69)
 
   Greta Ljung and George E. P. Box (1978) 'On a measure of lack of fit
-  in time series models', Biometrika, 66: 67-72.  
+  in time series models', Biometrika, vol. 66, pp. 67-72.  
   
   Ruey Tsay (2005) Analysis of Financial Time Series, 2nd ed. (Wiley,
   ch. 2)

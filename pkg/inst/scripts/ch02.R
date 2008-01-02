@@ -347,9 +347,9 @@ plot(log(1+m.3m4697), xlab="year", ylab="l-rtn")
 acf(as.numeric(m.3m4697), main="")
 par(op)
 
-eacf.3m <- eacf(m.3m4697, 6, 12)
-print(eacf.3m, 2) 
-print(eacf.3m) 
+#eacf.3m <- eacf(m.3m4697, 6, 12) # 'eacf' function not yet available' 
+#print(eacf.3m, 2) 
+#print(eacf.3m) 
 # This may be due to differences in how the arima parameters
 # are estimated, e.g, maximum likelihood vs. Yule-Walker.  
 
