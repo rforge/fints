@@ -37,12 +37,15 @@ AutocorTest(x, lag=ceiling(log(length(x))),
     statistic.
 
     This makes it easy to call AutocorTest with the residuals from a fit
-    and have the p-value reflect the number of 
+    and have the p-value computed with reference to a chi-square with
+    degrees of freedom different from "lag".  See the discussion
+    of degrees of freedom for 'Box.test in   \code{\link{ARIMA}}.      
+  }
 }
 \details{
   This is provided for compatibility with 'autocorTest' in the S-Plus
   script in Tsay (p. 30).  It is a wrapper for the R function
-  'Box.test'.  
+  \code{\link[stats]{Box.test}}.  
 }
 \value{
   a list of class 'htest' containing the following components:
@@ -80,7 +83,9 @@ AutocorTest(x, lag=ceiling(log(length(x))),
   2007.12.29.  
 }
 \seealso{
-  \code{\link[stats]{Box.test}} }
+  \code{\link[stats]{Box.test}}
+  \code{\link{ARIMA}}
+}
 \examples{
 data(m.ibm2697)
 AutocorTest(m.ibm2697, 5)

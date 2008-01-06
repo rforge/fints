@@ -94,7 +94,32 @@ d.c8603[1:2]
 ## 6.  m-ibmvwewsp2603
 ##     Monthly simple returns of IBM, VW, EW, SP (1/26-12/03)
 ##     (Format: date, IBM, VW, EW, & SP) 
-m.ibmvwewsp2603 <- read.zoo(ch01.[6], format="%Y%m%d",
+m.ibmvwewsp2603. <- read.table(ch01.[6], stringsAsFactors=TRUE, 
+                 col.names=c("date", "IBM", "VW", "EW", "SP") )  
+m.ibmvwewsp2603.[1:2,]
+sapply(m.ibmvwewsp2603., class)
+m.ibm..date <- as.Date(as.character(m.ibmvwewsp2603.$date),
+                       format="%Y%m%d")
+m.ibm..date[1:2]
+m.ibm..yearmon <- as.yearmon(m.ibm..date)
+names(m.ibm..yearmon) <- m.ibm..date
+m.ibm..yearmon[1:2]
+
+m.ibmvwewsp2603 <- zoo(m.ibmvwewsp2603.[-1], m.ibm..yearmon)
+m.ibmvwewsp2603[1:2,]
+index(m.ibmvwewsp2603)[1:2]
+                
+
+
+
+
+
+
+
+
+
+
+read.zoo(ch01.[6], format="%Y%m%d",
            col.names=c("date", "IBM", "VW", "EW", "SP") )  
 m.ibmvwewsp2603[1:2,]
 
