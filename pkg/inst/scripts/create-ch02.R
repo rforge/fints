@@ -102,8 +102,14 @@ q.gdp4703d <- as.yearmon(q.gdp4703a, "%Y %m")
 q.gdp4703d[1:4]
 class(q.gdp4703d)
 
+q.gdp4703q <- as.yearqtr(q.gdp4703d)
+q.gdp4703q[1:2]
+names(q.gdp4703q) <- q.gdp4703d
+q.gdp4703q[1:2]
+index(q.gdp4703q)[1:2]
+
 q.gdp4703 <- zoo(as.numeric(substring(q.gdp4703a, 8)),
-                 q.gdp4703d)
+                 q.gdp4703q)
 q.gdp4703[1:4]
 #q.gdp4703t <- strptime(q.gdp4703a, "%Y %m")
 #q.gdp4703t[1:4]
@@ -165,3 +171,5 @@ for(i in 1:nObj2)
 m.obj2 <- c(4:5, 9)
 for(i in m.obj2)
   save(list=ch02.datNames[i], file=ch02.rda[i])
+##############################
+  save(list=ch02.datNames[6], file=ch02.rda[6])
