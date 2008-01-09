@@ -173,7 +173,7 @@ par(op)
 
 # p. 118
 # unconditional var(a[t]) =
-str(spFit30.11)
+#str(spFit30.11)
 with(spFit30.11@fit, par["omega"]/(1-par["beta1"]-par["alpha1"]))
 # Differs from the book by 10%
 # ... within the numeric precision of available
