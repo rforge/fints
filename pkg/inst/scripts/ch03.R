@@ -259,4 +259,50 @@ for(i in 2:5)
 pred.s2.t["Inf"] <- (vCoef["omega"] /
                 (1-(vCoef["alpha1"] + vCoef["beta1"])) ) 
 round(sqrt(pred.s2.t), 5)
+#?????? numbers do not match ?????????
+
+# *** Can garchFit be used with assumed Student's t shocks?
+
+# p. 121
+# sec. 3.5.2.  Forecasting evaluation
+
+# sec. 3.5.3.  A two-pass estimation method
+
+mean(sp500)
+# 0.006143
+
+sp500a <- sp500-mean(sp500)
+
+(sp500a1.1 <- arima(sp500a^2, c(1,0,1)))
+
+coef(sp500a1.1)
+
+(beta.1 <- (-coef(sp500a1.1)[2]))
+(alpha.1 <- sum(coef(sp500a1.1)[1:2]))
+
+# p. 122
+##
+## 3.6.  The Integrated GARCH model
+##
+
+# How to estimate IGARCH?
+
+
+# p. 123
+##
+## 3.7.  The GARCH-M model
+##
+
+# How to estimate GARCH-M?
+
+
+# p. 124
+##
+## 3.8.  The exponential GARCH model
+##
+
+
+
+
+
 

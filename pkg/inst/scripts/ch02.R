@@ -371,6 +371,7 @@ log.3m0 <- cumsum(log(1+m.3m4697)-mean.log.3m)
 plot(log.3m, ylim=range(log.3m, log.3m0),
      xlab="year", ylab="log-price")
 lines(log.3m0, lty="dotted", col="red")
+t4697 <- index(log.3m)
 lines(t4697, mean.log.3m*(1:length(m.3m4697)))
 
 # p. 69
