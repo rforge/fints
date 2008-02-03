@@ -219,47 +219,12 @@ AutocorTest(std.res^2, 24)
 names(spFit00.11@fit)
 spFit00.11@fit$coef['mu']
 
-# For the one-step ahead volatility forecast,
-# we need the formula on the bottom of p. 119:
+pred.spFit00.11 <- predict(spFit00.11, 1000)
 
-#sigma2.h[1] = omega + alpha1*resid[h]^2 + beta1*sigma2.h
-(varCoef <- spFit00.11@fit$coef[-1])
+plot(pred.spFit00.11[, "standardDeviation"])
+pred.spFit00.11[c(1:5, 1000), -2]
 
-resids <- spFit00.11@residuals
-sigma.t <- spFit00.11@sigma.t
-N <- length(resids)
-
-pred.sigma2.t <- rep(NA, 6)
-names(pred.sigma2.t) <- c(1:5, Inf) 
-
-pred.sigma2.t[1] <- (varCoef["omega"] + varCoef["alpha1"] * resids[N]^2
-               + varCoef["beta1"] * sigma.t[N])
-# per expression (3.16), p. 115:
-for(i in 2:5)
-  pred.sigma2.t[i] <- (varCoef["omega"] +
-             (varCoef["alpha1"] + varCoef["beta1"]) * pred.sigma2.t[i-1])
-
-# per the last formula on the bottom of p. 115:
-pred.sigma2.t["Inf"] <- (varCoef["omega"] /
-                (1-(varCoef["alpha1"] + varCoef["beta1"])) ) 
-round(sqrt(pred.sigma2.t), 5)
-
-# compare with the book's numbers
-vCoef <- c(omega=0.000086, alpha1=0.1216, beta1=0.8511)
-pred.s2.t <- rep(NA, 6)
-names(pred.s2.t) <- c(1:5, Inf)
-pred.s2.t[1] <- (vCoef["omega"] + vCoef["alpha1"] * resids[N]^2
-               + vCoef["beta1"] * sigma.t[N])
-# per expression (3.16), p. 115:
-for(i in 2:5)
-  pred.s2.t[i] <- (vCoef["omega"] +
-             (vCoef["alpha1"] + vCoef["beta1"]) * pred.s2.t[i-1])
-
-# per the last formula on the bottom of p. 115:
-pred.s2.t["Inf"] <- (vCoef["omega"] /
-                (1-(vCoef["alpha1"] + vCoef["beta1"])) ) 
-round(sqrt(pred.s2.t), 5)
-#?????? numbers do not match ?????????
+# Moderately close to Table 3.1  
 
 # *** Can garchFit be used with assumed Student's t shocks?
 
