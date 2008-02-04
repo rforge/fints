@@ -494,7 +494,7 @@ par(op)
 # p. 76
 # Example 2.3
 
-x(fit.jnj <- arima(log(q.jnj), order=c(0, 1, 1),
+(fit.jnj <- arima(log(q.jnj), order=c(0, 1, 1),
                  seasonal=list(order=c(0, 1, 1))))
 #str(fit.jnj)
 sqrt(fit.jnj$sigma2)
