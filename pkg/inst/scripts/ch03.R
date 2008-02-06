@@ -48,16 +48,7 @@ str(m.intc7303)
 
 AutocorTest(log(1+as.numeric(m.intc7303)), lag=12)
 
-#archTest(log(1+as.numeric(m.intc7303)), lag=12)
-# doesn't work.  
-archlmtest(log(1+as.numeric(m.intc7303)), lag=12)
-
-
-##??????????????
-##
-## Question sent to a package maintainer.  2007.12.23
-##
-##??????????????
+ArchTest(log(1+as.numeric(m.intc7303)), lag=12)
 
 ##
 ## sec. 3.4.  The ARCH model
