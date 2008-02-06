@@ -50,6 +50,7 @@ AutocorTest(log(1+as.numeric(m.intc7303)), lag=12)
 
 #archTest(log(1+as.numeric(m.intc7303)), lag=12)
 # doesn't work.  
+archlmtest(log(1+as.numeric(m.intc7303)), lag=12)
 
 
 ##??????????????
