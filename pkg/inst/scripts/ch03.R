@@ -52,9 +52,9 @@ par(op)
 data(m.intc7303)
 str(m.intc7303)
 
-AutocorTest(log(1+as.numeric(m.intc7303)), lag=12)
+LjB.intc <- AutocorTest(log(1+as.numeric(m.intc7303)), lag=12)
 
-ArchTest(log(1+as.numeric(m.intc7303)), lag=12)
+LM.intc <- ArchTest(log(1+as.numeric(m.intc7303)), lag=12)
 
 ##
 ## sec. 3.4.  The ARCH model
@@ -101,31 +101,70 @@ ml.intc <- log(1+m.intc7303)
 #GarchFitting {fGarch} Univariate GARCH Time Series Fitting
 
 library(tseries)
-#arch3.fit <- garch(ml.intc, order=c(1, 3))
+#arch3.fit <- garch(ml.intc, order=c(0, 3))
 #Error in garch(ml.intc, order = c(1, 3)) : NAs in x
+# introduced by conversion from class 'zoo'
 
-arch3.fit <- garch(as.numeric(ml.intc), order=c(1, 3))
+(ml.intc. <- mean(ml.intc))
+# Moderatly close to "C" in the garch(3, 0) and garch(1, 0) results on p. 103
+ml.intc0 <- ml.intc-mean(ml.intc)
+arch3.fit <- garch(as.numeric(ml.intc0), order=c(0, 3))
 summary(arch3.fit)
-# very different from Tsay
+# Not a great match, but moderately close
+# to the garch(3, 0) results on p. 103.
 
-##??????????????
-##
-## Question sent to a package maintainer.  20007.12.24
-##
-##??????????????
+arch1.fit <- garch(as.numeric(ml.intc0), order=c(0, 1))
+summary(arch1.fit)
+# Closer to the book than for arch3.fit
+
+stdresi <- residuals(arch1.fit)
+
+AutocorTest(stdresi, 10)
+
+ArchTest(stdresi, 10)
+
+
+
+
+#### asymptotic sd (p. 111)
+
+
+
+
+
+
 
 library(fGarch)
 #arch3.Fit <- garchFit(~garch(3, 0), data=ml.intc)
+#Error in sum(beta) : invalid 'type' (closure) of argument
 
 ##??????????????
 ##
-## Question sent to a package maintainer.  2007.12.24
+## Questions sent to a package maintainer.
+## 2007.12.24 and 2008.02.16 
 ##
 ##??????????????
+
+resi <- residuals(arch1.fit)
+
+AutocorTest(resi[-1], 10)
+AutocorTest(resi[-1]^2, 10)
 
 # p. 112
 # Figure 3.4
-# plot of residuals from a fit that I don't know yet how to get
+
+op <- par(mfcol=c(2,2))
+Acf(resi[-1], lag.max=23, ylim=c(-.2, .4),
+    main="(a) Standardized residuals")
+Acf(resi[-1]^2, lag.max=23, ylim=c(-.2, .4), 
+    main="(b) Squares of standardized residuals")
+Acf(abs(resi[-1]), lag.max=23, ylim=c(-.2, .4),
+    main="(c) abs(standardized residuals)")
+plot(resi, type='l', main="(d) standardized residuals")
+par(op)
+
+
+
 
 
 # p. 113 
