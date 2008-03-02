@@ -1,4 +1,4 @@
-###
+##
 ### 
 ### Ruey S. Tsay (2005)
 ### Analysis of Financial Time Series, 2nd ed.
@@ -234,6 +234,7 @@ with(spFit30.11@fit, par["omega"]/(1-par["beta1"]-par["alpha1"]))
 
 # Drop insignificant terms and refit:  
 
+data(sp500)
 spFit00.11 <- garchFit(sp500~garch(1,1), data=sp500)
 #Warning messages:
 #1: In if (class(data) == "timeSeries") { :
