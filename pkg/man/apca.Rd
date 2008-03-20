@@ -19,7 +19,8 @@ apca(x,nf)
   }
 }
 \details{
-
+  NOTE:  This is a preliminary version of this function, and it may be
+  modified in the future.  
 }
 \value{
   A list with four components:
