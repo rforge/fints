@@ -1,3 +1,12 @@
+### ch. 9.  Principal Components Analysis and Factor Models 
+###
+### 
+### Ruey S. Tsay (2005)
+### Analysis of Financial Time Series, 2nd ed.
+### (Wiley)
+###
+###
+
 ## 
 ## 9.2.1 A Single-Factor Model
 ##

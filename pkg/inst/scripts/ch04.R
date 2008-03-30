@@ -1,3 +1,4 @@
+### ch. 4.  Nonlinear models and their applications 
 ###
 ### 
 ### Ruey S. Tsay (2005)
@@ -5,10 +6,6 @@
 ### (Wiley)
 ###
 ### 
-
-###
-### ch. 4.  Nonlinear models and their applications 
-###
 library(FinTS)
 # p. 154
 
