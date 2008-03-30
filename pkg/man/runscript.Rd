@@ -13,7 +13,12 @@ runscript(x, method=c('run', 'copy', 'view', 'dir'),
   \item{x}{
     an object to identify a file in package/subdir via sprintf(fmt, x).
 
-    For example, by default, x = 2 translates to 'ch02.R'.
+    For example, the default 'fmt' translates x = 2 into 'ch02.R'.  If
+    no 'x' is specified, a directory of options is provided.
+
+    CAUTION:  Under some systems like ESS (Emacs Speaks Statistics)
+    under Windows, pop-up menus such as produced by 'runscript()' may
+    not work properly.  
   }
   \item{method}{
     One of the following:
@@ -81,6 +86,9 @@ runscript(x, method=c('run', 'copy', 'view', 'dir'),
 }
 \examples{
 \dontrun{
+# provide a menu
+runscript()
+
 # run ~R\library\FinTS\scripts\ch01.R 
 runscript(1)
 

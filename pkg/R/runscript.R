@@ -7,12 +7,36 @@ runscript <- function(x, method=c('run', 'copy', 'view', 'dir'),
   mtd <- match.arg(method) 
     # chnames <- c(...) # chapter names
     # if (missing(x)) x <- match(select.list(chnames), chnames)
-    x <- as.numeric(x)
 #    s <- system.file("scripts", package = "FinTS")
-    s <- system.file(subdir, package = package, lib.loc=lib.loc)
+  s <- system.file(subdir, package = package, lib.loc=lib.loc)
+  {
+    if(missing(x)){
+      Ch0 <- dir(s, full.names=TRUE)
+      Ch.info <- file.info(Ch0)
+      Chs <- Ch0[!Ch.info$isdir]
+      chs <- dir(s)[!Ch.info$isdir] 
+      ns <- length(chs)
+      if(ns<1){
+        cat("no files found in directory", s, "\n")
+        return()
+      }
+      firstLine <- chs      
+      for(i in seq(1, length=ns)){
+        fL <- try(readLines(Chs[i], 1))
+        if(class(fL) != "try-error")
+          firstLine[i] <- paste(chs[i], fL, sep=" - ") 
+      }      
+      fL. <- (select.list(firstLine) == firstLine) 
+      ch <- chs[fL.]
+      Ch <- Chs[fL.]
+    }
+    else {  
 #    ch <- sprintf("ch%02d.R", x)
-    ch <- sprintf(fmt, x)
-    Ch <- paste(s, ch, sep="/")
+      x <- as.numeric(x)
+      ch <- sprintf(fmt, x)
+      Ch <- paste(s, ch, sep="/")
+    }
+  }
 ##
 ## 2.  method == 'dir'
 ##
