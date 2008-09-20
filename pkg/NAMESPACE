@@ -5,7 +5,6 @@ export(Acf, apca, ArchTest, ARIMA, as.yearmon2, AutocorTest,
 
 importFrom(graphics, plot)
 importFrom(zoo, as.Date.numeric)
-importFrom(base, summary)
 
 S3method(plot, Acf)
 S3method(plot, loadings)

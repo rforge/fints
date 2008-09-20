@@ -56,7 +56,7 @@ url2data                Create local copies of files read from urls.
 }
 
 See the \code{scripts} subdirectory of the \code{FinTS} installation
-directory =  system.file(package='FinTS').  
+directory =  system.file(package='FinTS').
 
 }
 \author{
@@ -77,10 +77,10 @@ Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
 }
 \examples{
 # Where is the 'FinTS' directory?
-system.file(package='FinTS').
+system.file(package='FinTS')
 
 # View the script file 'ch01.R', which is in the 'scripts'
-# subdirectory of the system.file(package='FinTS') directory:  
+# subdirectory of the system.file(package='FinTS') directory:
 runscript(1, 'view')
 
 # SP statistics in Table 1.2 of Tsay
