@@ -13,7 +13,7 @@ Includes data sets, functions and script files
 required to work some of the examples.  Version 0.2-x
 includes R objects for all data files used in the text
 and script files to recreate most of the analyses in
-chapters 1-3 plus parts of chapters 3 and 11.
+chapters 1-3 and 9 plus parts of chapters 4 and 11.
 }
 \details{
 \tabular{ll}{
@@ -55,9 +55,11 @@ runscript               Run a package script
 url2data                Create local copies of files read from urls.
 }
 
-See the \code{scripts} subdirectory of the \code{FinTS} installation
-directory =  system.file(package='FinTS').
+    See the \code{scripts} subdirectory of the \code{FinTS} installation
+    directory =  system.file(package='FinTS').
 
+    Corrections to the script files provided and contributions to script
+    files for other chapters will be graciously accepted.
 }
 \author{
 Spencer Graves
