@@ -1,3 +1,8 @@
+Changes in Version 0.3-7
+
+  o Added "See Also: 'file.path'" to the help file
+    for 'package.dir' to make it easier to find.
+
 Changes in Version 0.3-6
 
   o This is the first version to have a complete
