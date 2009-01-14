@@ -15,13 +15,15 @@ data(d.cscoy99)
   Objects of class zoo giving returns for each trading day for different
   periods
 
-  \item{d.ibmy98}{
-    Zoo object giving daily  simple returns of IBM stock for each
-    trading day in 1998.
-  }
-  \item{d.cscoy99}{
-    Zoo object giving daily log returns of Cisco stock for each trading
-    day in 1999.
+  \itemize{
+    \item{d.ibmy98}{
+      Zoo object giving daily  simple returns of IBM stock for each
+      trading day in 1998.
+    }
+    \item{d.cscoy99}{
+      Zoo object giving daily log returns of Cisco stock for each
+      trading day in 1999.
+    }
   }
 }
 %\details{}
