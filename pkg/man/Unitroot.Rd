@@ -49,8 +49,10 @@ Unitroot(x, trend=c("c", "nc", "ct"), method=c('adf', 'McKinnon'),
   }
 }
 \details{
-  There are 4 functions in different contributed packages in R for the
-  Augmented Dickey-Fuller test (as of 2007.12.11):
+%  There are 4 functions in different contributed packages in R for the
+%  Augmented Dickey-Fuller test (as of 2007.12.11):
+  There are 3 functions in different contributed packages in R for the
+  Augmented Dickey-Fuller test (as of 2009.08.24):
 
   \code{adf.test{tseries}} by A. Trapletti
 
@@ -59,7 +61,7 @@ Unitroot(x, trend=c("c", "nc", "ct"), method=c('adf', 'McKinnon'),
 
   \code{ur.df{urca}} by Bernhard Pfaff
 
-  \code{ADF.test{uroot}} by Javier Lopez-de-Lacalle
+%  \code{ADF.test{uroot}} by Javier Lopez-de-Lacalle
 
   This 'Unitroot' function and the companion 'summary.fHTEST' use
   'adfTest'. It is provided for partial compatibility with the S-PLUS
@@ -129,15 +131,15 @@ if(require(urca))ur.df(log(q.gdp4703), type='drift', lags=9)
 # The first is the ADF statistic on Tsay, p. 70.
 # It's not obvious what the second number is.
 
-##
-## Using ADF.test{uroot}
-##
-if(require(uroot)){
-   gdp.ts <- ts(log(q.gdp4703), frequency=4, start=c(1947,1))
-   ADF.test(gdp.ts, c(1,0,0), selectlags=list(mode=as.numeric(1:9)))
-#  Gives the ADF statistic on p. 71, but the p-value is wrong.
-}
-
+%##
+%## Using ADF.test{uroot}
+%##
+%if(require(uroot)){
+%   gdp.ts <- ts(log(q.gdp4703), frequency=4, start=c(1947,1))
+%   ADF.test(gdp.ts, c(1,0,0), selectlags=list(mode=as.numeric(1:9)))
+%#  Gives the ADF statistic on p. 71, but the p-value is wrong.
+%}
+%
 ##
 ## Using adf.test{tseries}
 ##
