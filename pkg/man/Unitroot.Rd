@@ -35,7 +35,7 @@ Unitroot(x, trend=c("c", "nc", "ct"), method=c('adf', 'McKinnon'),
     the maximum number of lags used for error term correction.
 
     NOTE:  This is one more than the 'lags' argument used in 'adfTest',
-    'unitrootTest', 'ur.df', 'ADF.test' and 'ur.df'.  See the comparison
+    'unitrootTest', 'ADF.test' and 'ur.df'.  See the comparison
     in the examples.  The default was copied from 'ur.df' and
     'UnitrootTests', noting that the 'lags' argument for other R
     functions are one less than that of 'unitroot' in S-PLUS
@@ -94,10 +94,9 @@ Unitroot(x, trend=c("c", "nc", "ct"), method=c('adf', 'McKinnon'),
 }
 \seealso{
   \code{\link[fUnitRoots]{UnitrootTests}}
-  \code{\link[fUnitRoots]{adfTest}}
-  \code{\link[fUnitRoots]{unitrootTest}}
-  \code{\link[ur.df]{urca}}
-  \code{\link[uroot]{ADF.test}}
+%  \code{\link{adfTest}}
+%  \code{\link{unitrootTest}}
+%  \code{\link[uroot]{ADF.test}}
   \code{\link[urca]{ur.df}}
 }
 \examples{

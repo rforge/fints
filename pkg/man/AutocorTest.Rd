@@ -81,7 +81,7 @@ AutocorTest(x, lag=ceiling(log(length(x))),
   2007.12.29.
 }
 \seealso{
-  \code{\link[stats]{Box.test}}
+  \code{\link{Box.test}}
   \code{\link{ARIMA}}
 }
 \examples{
