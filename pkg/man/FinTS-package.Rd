@@ -77,7 +77,6 @@ Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
   \url{
     http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2
   }
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
 # Where is the 'FinTS' directory?
