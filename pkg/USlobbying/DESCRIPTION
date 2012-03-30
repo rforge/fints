@@ -1,0 +1,13 @@
+Package: USlobbying
+Type: Package
+Title: Documents Filed under the US Lobbying Disclosure Act
+Version: 0.0-0
+Date: 2012-03-20
+Author: Spencer Graves
+Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
+Description: Download and clean documents filed under the
+  Lobbying Disclosure Act (LDA) of the United States of America.
+License: GPL (>= 2)
+URL: http://www.senate.gov/legislative/Public_Disclosure/LDA_reports.htm
+Depends:
+Suggests:
