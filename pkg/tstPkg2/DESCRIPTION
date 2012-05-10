@@ -1,0 +1,14 @@
+Package: tstPkg2
+Version: 0.0-0
+Date: 2012-05-09
+Title: Test Package 2
+Author: Spencer Graves <spencer.graves@prodsyse.com>
+Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
+Depends: R (>= 2.10.0), tstPkg1
+Imports:
+Suggests:
+Description:  An alias for t() to test whether a Matrix can be transposed
+     in a package that does NOT reference library(Matrix).
+License: GPL (>= 2)
+URL:
+LazyData: true
