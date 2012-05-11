@@ -26,10 +26,13 @@ mt <- tr(as.matrix(M.))
 all.equal(as.matrix(M.), mt)
 \dontshow{)}
 
+t(M.) # works --> BUT:
 \dontrun{
-# This doesn't work, because R can't find
-# the version of t.default in Marix:
 Mt <- tr(M.)
+
+# does NOT work,
+# because Matrix is NOT in the NAMESPACE
+# for tstPkg2
 
 ### R CMD check ends as follows:
 * checking examples ... ERROR
