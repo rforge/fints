@@ -18,4 +18,4 @@ URL: http://faculty.chicagobooth.edu/ruey.tsay/teaching/bs41202/sp2009
 Depends:  zoo, graphics
 Suggests:  moments, distrEx, tseries, urca,
  lmtest, sandwich, psych, GPArotation, chron,
- polynom, fUnitRoots, e1071
+ polynom, e1071
