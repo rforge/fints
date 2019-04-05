@@ -5,7 +5,7 @@ Title: Companion to Tsay (2005) Analysis of Financial
 Version: 0.4-5
 Date: 2009-01-12
 Author: Spencer Graves
-Maintainer: Spencer Graves <spencer.graves@prodsyse.com>
+Maintainer: Georgi Boshnakov <georgi.boshnakov@manchester.ac.uk>
 Description: R companion to Tsay (2005)
  Analysis of Financial Time Series, 2nd ed. (Wiley).
  Includes data sets, functions and script files
