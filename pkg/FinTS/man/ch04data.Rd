@@ -8,7 +8,7 @@
 \alias{w.3mtbs7097}
 \alias{m.ibmln2699}
 \alias{q.unemrate}
-\title{ financial time series for Tsay (2005, chapter 4[text]) }
+\title{ Financial time series for Tsay (2005, ch. 4) }
 \description{
   Financial time series used in examples in chapter 4.
 }

@@ -1,3 +1,9 @@
+Changes in Version 0.4-7
+
+  o Updated the documentation - 'FinTS-package.Rd' contained hard coded strings
+    related to old versions of FinTS (now they are computed at build time).
+    Also, a number of minor edits and corrections in most Rd files.
+
 Changes in Version 0.4-6
 
   o New maintainer - Georgi N. Boshnakov.

@@ -7,7 +7,7 @@
 \alias{m.5cln}
 %\alias{m.bnd}
 \alias{m.apca0103}
-\title{ financial time series for Tsay (2005, chapter 9[text]) }
+\title{ Financial time series for Tsay (2005, ch. 9) }
 \description{
   Financial time series used in examples in chapter 9.
 }
@@ -115,11 +115,11 @@ data(m.apca0103)
 }
 \keyword{datasets}
 \seealso{
-  \code{\link{ch01data}}
-  \code{\link{ch02data}}
-  \code{\link{ch03data}}
-  \code{\link{ch04data}}
-  \code{\link{ch05data}}
+  \code{\link{ch01data}},
+  \code{\link{ch02data}},
+  \code{\link{ch03data}},
+  \code{\link{ch04data}},
+  \code{\link{ch05data}},
   \code{\link{ch06data}}
 }
 \examples{
@@ -129,10 +129,10 @@ dim(m.apca0103)
 # Are the dates all the same?
 sameDates <- rep(NA, 39)
 for(i in 1:39)
-   sameDates[i] <- with(m.apca0103, all.equal(date[1:36],
-                         date[(i*36)+1:36]))
+    sameDates[i] <- with(m.apca0103,
+                         all.equal(date[1:36], date[(i*36)+1:36]))
 stopifnot(all(sameDates))
-M.apca0103 <- with(m.apca0103, array(return, dim=c(36, 40), dimnames=
-        list(NULL, paste("Co", CompanyID[seq(1, 1440, 36)], sep=""))))
+M.apca0103 <- with(m.apca0103, array(return, dim = c(36, 40), dimnames =
+    list(NULL, paste("Co", CompanyID[seq(1, 1440, 36)], sep=""))))
 }
 

@@ -65,7 +65,7 @@ FinTS.url
       A character string giving the universal resource locator (URL)
       associated with the Tsay (2005) book:
 
-      FinTS.url <- "http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2"
+      \code{FinTS.url <- "http://faculty.chicagogsb.edu/ruey.tsay/teaching/fts2"}
     }
   }
 }
@@ -78,6 +78,4 @@ FinTS.url
 data(TsayFiles)
 TsayFiles$ch01$exercises
 }
-% docclass is function
 \keyword{datasets}
-

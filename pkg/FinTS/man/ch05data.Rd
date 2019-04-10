@@ -9,7 +9,7 @@
 \alias{ibm91.adsx}
 \alias{day15.ori}
 \alias{day15}
-\title{ financial time series for Tsay (2005, chapter 5[text]) }
+\title{ Financial time series for Tsay (2005, ch. 5) }
 \description{
   Financial time series used in examples in chapter 5.
 }
@@ -53,7 +53,7 @@ data(day15)
       a data.frame on the changes in the price of IBM stock transactions
       between November 1, 1990 and January 31, 1991.  This period
       includes 63 trading days, during which 59,838 transactions were
-      recorded during normal trading hours.  The first transcation for
+      recorded during normal trading hours.  The first transaction for
       each day was dropped leaving the 59,775 transactions in this
       data.frame.
 
@@ -68,9 +68,11 @@ data(day15)
 	  Size of the price change in number of ticks of 1/8 of a US
 	  dollar.
 
-	  NOTE:  There are 10 anomalous records for which A.priceChange
-	  !=0 but SizeInTicks == 0 in this data.frame.  These correspond
-	  to price changes of half a tick, which got rounded down to 0.
+	  NOTE: In this data.frame there are 10 anomalous records for
+             which \code{A.priceChange !=0} but \code{SizeInTicks == 0}.
+             These correspond to price changes of half a tick, which got
+             rounded down to 0.
+
 	}
       }
     }
@@ -95,10 +97,11 @@ data(day15)
 	\item{SizeInTicks}{
 	  Size of the price change in the previous trade in number of
 	  ticks of 1/8 of a US dollar.
-
-	  NOTE:  The last three columns are ibm91.ads lagged one
-	  transaction, so ibm91.adsx[-1, 4:5] == ibm91.ads[-59775, ],
+	  \strong{NOTE:}  The last three columns are ibm91.ads lagged one
+	  transaction, so
+	  \code{ibm91.adsx[-1, 4:5] == ibm91.ads[-59775, ]},
 	  with 24 exceptions.
+
 	}
       }
     }

@@ -6,7 +6,7 @@
 \alias{m.gs1n3.5301}
 \alias{w.tb3n6ms}
 \alias{sp5may}
-\title{ financial time series for Tsay (2005, chapter 8[text]) }
+\title{ Financial time series for Tsay (2005, ch. 8) }
 \description{
   Financial time series used in examples in chapter 8.
 }
@@ -105,9 +105,8 @@ data(sp5may)
 }
 \keyword{datasets}
 \seealso{
-  \code{\link{ch01data}}
+  \code{\link{ch01data}},
   \code{\link{ch02data}}
 }
 %\examples{
 %}
-

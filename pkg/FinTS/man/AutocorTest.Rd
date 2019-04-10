@@ -5,9 +5,9 @@
   Ljung-Box test for autocorrelation
 }
 \usage{
-AutocorTest(x, lag=ceiling(log(length(x))),
-            type=c("Ljung-Box", "Box-Pierce", "rank"),
-            df=lag )
+AutocorTest(x, lag = ceiling(log(length(x))),
+            type = c("Ljung-Box", "Box-Pierce", "rank"),
+            df = lag )
 }
 \arguments{
   \item{x}{
@@ -90,7 +90,5 @@ AutocorTest(m.ibm2697, 5)
 
 AT4 <- AutocorTest(m.ibm2697, 5, df=4)
 str(AT4) # $method = "Box-Ljung test (lag = 5)"
-
 }
 \keyword{ts}
-

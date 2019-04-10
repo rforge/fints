@@ -20,7 +20,7 @@
 \alias{m.gs5}
 \alias{w.tb3ms}
 \alias{w.tb6ms}
-\title{ financial time series for Tsay (2005, chapter 1[text]) }
+\title{ Financial time series for Tsay (2005, ch. 1) }
 \description{
   Financial time series used in examples in chapter 1.
 }
@@ -141,7 +141,4 @@ data(d.c8603)
     MSFT=FinTS.stats(100*log(1+d.msft8603[, 'MSFT'])),
     C  = FinTS.stats(100*log(1+d.c8603[, "C"]))
 ) )
-
-
 }
-

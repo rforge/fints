@@ -3,7 +3,7 @@
 \alias{ch06data}
 \alias{d.ibmy98}
 \alias{d.cscoy99}
-\title{ financial time series for Tsay (2005, chapter 6[text]) }
+\title{ Financial time series for Tsay (2005, ch. 6) }
 \description{
   Financial time series used in examples in chapter 6.
 }
@@ -38,10 +38,10 @@ data(d.cscoy99)
 }
 \keyword{datasets}
 \seealso{
-  \code{\link{ch01data}}
-  \code{\link{ch02data}}
-  \code{\link{ch03data}}
-  \code{\link{ch04data}}
+  \code{\link{ch01data}},
+  \code{\link{ch02data}},
+  \code{\link{ch03data}},
+  \code{\link{ch04data}},
   \code{\link{ch05data}}
 }
 %\examples{}

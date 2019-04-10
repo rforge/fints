@@ -9,7 +9,7 @@
 \alias{m.ibmspln}
 \alias{m.ibmsplnsu}
 \alias{d.sp8099}
-\title{ financial time series for Tsay (2005, chapter 3[text]) }
+\title{ Financial time series for Tsay (2005, ch. 3) }
 \description{
   Financial time series used in examples in chapter 3.
 }
@@ -21,7 +21,7 @@ data(sp500)
 #d.ibmvwewsp6203
 data(m.ibmspln)
 data(m.ibmsplnsu)
-data(d.sp8099  )
+data(d.sp8099)
 }
 \format{
   Three data stes used in chapter 3 are also used in chapter 1 or 2 and
@@ -76,7 +76,7 @@ data(d.sp8099  )
 }
 \keyword{datasets}
 \seealso{
-  \code{\link{ch01data}}
+  \code{\link{ch01data}},
   \code{\link{ch02data}}
 }
 %\examples{

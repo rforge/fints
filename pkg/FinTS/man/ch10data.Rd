@@ -6,7 +6,7 @@
 \alias{m.mrk6503}
 %\alias{m.ibmsp2699}
 \alias{d.spcscointc}
-\title{ financial time series for Tsay (2005, chapter 10[text]) }
+\title{ Financial time series for Tsay (2005, ch. 10) }
 \description{
   Financial time series used in examples in chapter 10.
 }
@@ -66,14 +66,14 @@ data(d.spcscointc)
 }
 \keyword{datasets}
 \seealso{
-  \code{\link{ch01data}}
-  \code{\link{ch02data}}
-  \code{\link{ch03data}}
-  \code{\link{ch04data}}
-  \code{\link{ch05data}}
-  \code{\link{ch06data}}
-  \code{\link{ch07data}}
-  \code{\link{ch08data}}
+  \code{\link{ch01data}},
+  \code{\link{ch02data}},
+  \code{\link{ch03data}},
+  \code{\link{ch04data}},
+  \code{\link{ch05data}},
+  \code{\link{ch06data}},
+  \code{\link{ch07data}},
+  \code{\link{ch08data}},
   \code{\link{ch09data}}
 }
 %\examples{
